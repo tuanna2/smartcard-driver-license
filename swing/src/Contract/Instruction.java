@@ -17,8 +17,6 @@ public interface Instruction {
 
     static final byte INS_READ_AVATAR_IMAGE = 0x02;
 
-    static final byte INS_WRITE_ALL_BASIC_INFO = 0x10;
-
     static final byte INS_REWRITE_CARD_ID = 0x11;
 
     static final byte INS_REWRITE_FULLNAME = 0x12;
