@@ -1,6 +1,9 @@
 package smrtdrv;
 
 import javacard.framework.*;
+import javacard.security.KeyBuilder;
+import javacard.security.*;
+import javacardx.crypto.*;
 
 public class LicenseApplet extends Applet {
 
@@ -17,7 +20,7 @@ public class LicenseApplet extends Applet {
   static final byte INS_SET_CARD_TYPE = 0x17;
   static final byte INS_SET_AVATAR_IMAGE = 0x18;
 
-  static final byte INS_WRITE_NEW_VIOLATION = 0x19;
+  static final byte INS_INSERT_VIOLATION = 0x19;
   static final byte INS_CLEAR_LIST_VIOLATION = 0x20;
 
   static final short CARD_ID_LENGTH = 0x08;
@@ -121,7 +124,7 @@ public class LicenseApplet extends Applet {
         buf[0] = (byte) len;
         apdu.sendBytes((short)0, (short)1);
         break;
-      case INS_WRITE_NEW_VIOLATION:
+      case INS_INSERT_VIOLATION:
           Util.arrayCopy(listViolation, (short) 0, listViolation, (short)5, (short) 20);
           Util.arrayCopy(buf, (short) ISO7816.OFFSET_CDATA, listViolation, (short)0, (short)5);
         break;

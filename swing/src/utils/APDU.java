@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utils;
 
 import java.awt.HeadlessException;
@@ -19,10 +14,6 @@ import javax.smartcardio.ResponseAPDU;
 import javax.smartcardio.TerminalFactory;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author superuser
- */
 public class APDU {
 
     private Card card;
