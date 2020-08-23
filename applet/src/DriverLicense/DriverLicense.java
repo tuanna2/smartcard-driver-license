@@ -25,7 +25,7 @@ public class DriverLicense extends Applet {
 
   static final short CARD_ID_LENGTH = 0x08;
   static final short DATE_FORMAT_LENGTH = 0x04;
-  static final int MAX_IMAGE_SIZE = 30000;
+  private static short MAX_IMAGE_SIZE;
 
   private static byte cardType;
 
@@ -51,7 +51,7 @@ public class DriverLicense extends Applet {
     address = new byte[100];
     releaseDate = new byte[DATE_FORMAT_LENGTH];
     expireDate = new byte[DATE_FORMAT_LENGTH];
-    avatarImage = new byte[MAX_IMAGE_SIZE];
+    avatarImage = new byte[254];
 
     cardIdLen = CARD_ID_LENGTH;
     fullNameLen = (short) fullName.length;
@@ -59,6 +59,7 @@ public class DriverLicense extends Applet {
     addressLen = (short) address.length;
     releaseDateLen = (short) releaseDate.length;
     expireDateLen = (short) expireDate.length;
+    avatarImageLen = (short) avatarImage.length;
  }
 
   public void process(APDU apdu) {
@@ -125,7 +126,7 @@ public class DriverLicense extends Applet {
         break;
       case INS_SET_AVATAR_IMAGE:
         Util.arrayCopy(buf, (short) ISO7816.OFFSET_CDATA, avatarImage, (short)0, (short)len);
-        avatarImageLen = (short)len;
+        avatarImageLen = len;
         apdu.setOutgoing();
         apdu.setOutgoingLength((short) avatarImageLen);
         buf[0] = (byte) len;

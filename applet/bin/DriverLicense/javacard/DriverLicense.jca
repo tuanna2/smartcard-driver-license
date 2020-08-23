@@ -1,5 +1,5 @@
 // converted by version 1.3
-// on Sun Aug 23 14:53:08 ICT 2020
+// on Sun Aug 23 19:12:46 ICT 2020
 
 .package DriverLicense {
 	.aid 0x11:0x22:0x33:0x44:0x55;
@@ -54,21 +54,21 @@
 		// 18
 		staticFieldRef short DriverLicense/expireDateLen;
 		// 19
-		virtualMethodRef 0.3.3()Z;		// selectingApplet()Z
-		// 20
-		virtualMethodRef 0.10.1()[B;		// getBuffer()[B
-		// 21
-		virtualMethodRef 0.10.6()S;		// setIncomingAndReceive()S
-		// 22
-		virtualMethodRef 0.10.7()S;		// setOutgoing()S
-		// 23
-		virtualMethodRef 0.10.9(S)V;		// setOutgoingLength(S)V
-		// 24
-		virtualMethodRef 0.10.5([BSS)V;		// sendBytesLong([BSS)V
-		// 25
-		virtualMethodRef 0.10.4(SS)V;		// sendBytes(SS)V
-		// 26
 		staticFieldRef short DriverLicense/avatarImageLen;
+		// 20
+		virtualMethodRef 0.3.3()Z;		// selectingApplet()Z
+		// 21
+		virtualMethodRef 0.10.1()[B;		// getBuffer()[B
+		// 22
+		virtualMethodRef 0.10.6()S;		// setIncomingAndReceive()S
+		// 23
+		virtualMethodRef 0.10.7()S;		// setOutgoing()S
+		// 24
+		virtualMethodRef 0.10.9(S)V;		// setOutgoingLength(S)V
+		// 25
+		virtualMethodRef 0.10.5([BSS)V;		// sendBytesLong([BSS)V
+		// 26
+		virtualMethodRef 0.10.4(SS)V;		// sendBytes(SS)V
 		// 27
 		staticMethodRef 0.16.1([BS[BSS)S;		// javacard/framework/Util.arrayCopy([BS[BSS)S
 		// 28
@@ -96,7 +96,7 @@
 			static final byte INS_CLEAR_LIST_VIOLATION = 32;		// B
 			static final short CARD_ID_LENGTH = 8;		// S
 			static final short DATE_FORMAT_LENGTH = 4;		// S
-			static final int MAX_IMAGE_SIZE = 30000;		// I
+			private static short MAX_IMAGE_SIZE;		// S
 			private static byte cardType;		// B
 			private static byte[] cardId;		// [B
 			private static byte[] fullName;		// [B
@@ -276,7 +276,7 @@
 					sconst_4;
 					newarray 11;
 					putstatic_a 11;		// reference DriverLicense/DriverLicense.expireDate
-					sspush 30000;
+					sspush 254;
 					newarray 11;
 					putstatic_a 12;		// reference DriverLicense/DriverLicense.avatarImage
 					bspush 8;
@@ -296,6 +296,9 @@
 					getstatic_a 11;		// reference DriverLicense/DriverLicense.expireDate
 					arraylength;
 					putstatic_s 18;		// short DriverLicense/DriverLicense.expireDateLen
+					getstatic_a 12;		// reference DriverLicense/DriverLicense.avatarImage
+					arraylength;
+					putstatic_s 19;		// short DriverLicense/DriverLicense.avatarImageLen
 					return;
 		}
 
@@ -306,14 +309,14 @@
 			.descriptor	Ljavacard/framework/APDU;	0.10;
 
 				L0:	aload_0;
-					invokevirtual 19;		// selectingApplet()Z
+					invokevirtual 20;		// selectingApplet()Z
 					ifeq L2;
 				L1:	return;
 				L2:	aload_1;
-					invokevirtual 20;		// getBuffer()[B
+					invokevirtual 21;		// getBuffer()[B
 					astore_2;
 				L3:	aload_1;
-					invokevirtual 21;		// setIncomingAndReceive()S
+					invokevirtual 22;		// setIncomingAndReceive()S
 					sstore_3;
 				L4:	aload_2;
 					sconst_1;
@@ -336,16 +339,16 @@
 					sadd;
 					sstore 4;
 				L6:	aload_1;
-					invokevirtual 22;		// setOutgoing()S
+					invokevirtual 23;		// setOutgoing()S
 					pop;
 					aload_1;
 					sload 4;
-					invokevirtual 23;		// setOutgoingLength(S)V
+					invokevirtual 24;		// setOutgoingLength(S)V
 					aload_1;
 					getstatic_a 6;		// reference DriverLicense/DriverLicense.cardId
 					sconst_0;
 					getstatic_s 13;		// short DriverLicense/DriverLicense.cardIdLen
-					invokevirtual 24;		// sendBytesLong([BSS)V
+					invokevirtual 25;		// sendBytesLong([BSS)V
 					aload_2;
 					sconst_0;
 					getstatic_s 14;		// short DriverLicense/DriverLicense.fullNameLen
@@ -354,12 +357,12 @@
 					aload_1;
 					sconst_0;
 					sconst_1;
-					invokevirtual 25;		// sendBytes(SS)V
+					invokevirtual 26;		// sendBytes(SS)V
 					aload_1;
 					getstatic_a 7;		// reference DriverLicense/DriverLicense.fullName
 					sconst_0;
 					getstatic_s 14;		// short DriverLicense/DriverLicense.fullNameLen
-					invokevirtual 24;		// sendBytesLong([BSS)V
+					invokevirtual 25;		// sendBytesLong([BSS)V
 					aload_2;
 					sconst_0;
 					getstatic_s 16;		// short DriverLicense/DriverLicense.addressLen
@@ -368,27 +371,27 @@
 					aload_1;
 					sconst_0;
 					sconst_1;
-					invokevirtual 25;		// sendBytes(SS)V
+					invokevirtual 26;		// sendBytes(SS)V
 					aload_1;
 					getstatic_a 9;		// reference DriverLicense/DriverLicense.address
 					sconst_0;
 					getstatic_s 16;		// short DriverLicense/DriverLicense.addressLen
-					invokevirtual 24;		// sendBytesLong([BSS)V
+					invokevirtual 25;		// sendBytesLong([BSS)V
 					aload_1;
 					getstatic_a 8;		// reference DriverLicense/DriverLicense.birthDate
 					sconst_0;
 					getstatic_s 15;		// short DriverLicense/DriverLicense.birthDateLen
-					invokevirtual 24;		// sendBytesLong([BSS)V
+					invokevirtual 25;		// sendBytesLong([BSS)V
 					aload_1;
 					getstatic_a 10;		// reference DriverLicense/DriverLicense.releaseDate
 					sconst_0;
 					getstatic_s 17;		// short DriverLicense/DriverLicense.releaseDateLen
-					invokevirtual 24;		// sendBytesLong([BSS)V
+					invokevirtual 25;		// sendBytesLong([BSS)V
 					aload_1;
 					getstatic_a 11;		// reference DriverLicense/DriverLicense.expireDate
 					sconst_0;
 					getstatic_s 18;		// short DriverLicense/DriverLicense.expireDateLen
-					invokevirtual 24;		// sendBytesLong([BSS)V
+					invokevirtual 25;		// sendBytesLong([BSS)V
 					aload_2;
 					sconst_0;
 					getstatic_b 5;		// byte DriverLicense/DriverLicense.cardType
@@ -396,33 +399,33 @@
 					aload_1;
 					sconst_0;
 					sconst_1;
-					invokevirtual 25;		// sendBytes(SS)V
+					invokevirtual 26;		// sendBytes(SS)V
 					goto_w L20;
 				L7:	aload_1;
-					invokevirtual 22;		// setOutgoing()S
+					invokevirtual 23;		// setOutgoing()S
 					pop;
 					aload_1;
 					getfield_a_this 0;		// reference DriverLicense/DriverLicense.listViolation
 					arraylength;
-					invokevirtual 23;		// setOutgoingLength(S)V
+					invokevirtual 24;		// setOutgoingLength(S)V
 					aload_1;
 					getfield_a_this 0;		// reference DriverLicense/DriverLicense.listViolation
 					sconst_0;
 					getfield_a_this 0;		// reference DriverLicense/DriverLicense.listViolation
 					arraylength;
-					invokevirtual 24;		// sendBytesLong([BSS)V
+					invokevirtual 25;		// sendBytesLong([BSS)V
 					goto_w L20;
 				L8:	aload_1;
-					invokevirtual 22;		// setOutgoing()S
+					invokevirtual 23;		// setOutgoing()S
 					pop;
 					aload_1;
-					getstatic_s 26;		// short DriverLicense/DriverLicense.avatarImageLen
-					invokevirtual 23;		// setOutgoingLength(S)V
+					getstatic_s 19;		// short DriverLicense/DriverLicense.avatarImageLen
+					invokevirtual 24;		// setOutgoingLength(S)V
 					aload_1;
 					getstatic_a 12;		// reference DriverLicense/DriverLicense.avatarImage
 					sconst_0;
-					getstatic_s 26;		// short DriverLicense/DriverLicense.avatarImageLen
-					invokevirtual 24;		// sendBytesLong([BSS)V
+					getstatic_s 19;		// short DriverLicense/DriverLicense.avatarImageLen
+					invokevirtual 25;		// sendBytesLong([BSS)V
 					goto_w L20;
 				L9:	aload_2;
 					sconst_5;
@@ -495,13 +498,13 @@
 					invokestatic 27;		// javacard/framework/Util.arrayCopy([BS[BSS)S
 					pop;
 					sload_3;
-					putstatic_s 26;		// short DriverLicense/DriverLicense.avatarImageLen
+					putstatic_s 19;		// short DriverLicense/DriverLicense.avatarImageLen
 					aload_1;
-					invokevirtual 22;		// setOutgoing()S
+					invokevirtual 23;		// setOutgoing()S
 					pop;
 					aload_1;
-					getstatic_s 26;		// short DriverLicense/DriverLicense.avatarImageLen
-					invokevirtual 23;		// setOutgoingLength(S)V
+					getstatic_s 19;		// short DriverLicense/DriverLicense.avatarImageLen
+					invokevirtual 24;		// setOutgoingLength(S)V
 					aload_2;
 					sconst_0;
 					sload_3;
@@ -510,7 +513,7 @@
 					aload_1;
 					sconst_0;
 					sconst_1;
-					invokevirtual 25;		// sendBytes(SS)V
+					invokevirtual 26;		// sendBytes(SS)V
 					goto L20;
 				L17:	getfield_a_this 0;		// reference DriverLicense/DriverLicense.listViolation
 					sconst_0;
@@ -534,7 +537,7 @@
 					invokestatic 28;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
 					pop;
 					sconst_0;
-					putstatic_s 26;		// short DriverLicense/DriverLicense.avatarImageLen
+					putstatic_s 19;		// short DriverLicense/DriverLicense.avatarImageLen
 					goto L20;
 				L19:	sspush 27904;
 					invokestatic 29;		// javacard/framework/ISOException.throwIt(S)V

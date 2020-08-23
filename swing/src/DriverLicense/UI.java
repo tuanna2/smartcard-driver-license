@@ -5,13 +5,16 @@
  */
 package DriverLicense;
 
+import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 import javax.smartcardio.ResponseAPDU;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import utils.EncodeUtils;
 
@@ -707,6 +710,20 @@ public class UI extends javax.swing.JFrame {
             disconnectBtn.setVisible(true);
             UserInfo license = Service.getInstanse().getLicenseInfo(APDU.getInstanse().makeCommand(00, Applet.INS_GET_USER_INFO, 00, 00));
             renderLicenseInfo(license);
+            ResponseAPDU response = APDU.getInstanse().makeCommand(00, Applet.INS_GET_AVATAR_IMAGE, 00, 00);
+            if (response.getSW1() == 0x90) {
+                byte[] buffer = response.getBytes();
+                StringBuilder imagePath = new StringBuilder();
+                for (int i = 0; i < (buffer.length - 2) ; i++) {
+                    imagePath.append(Character.toString((char) buffer[i]));
+                }
+                jPanel10.removeAll();
+                JLabel label = new JLabel(new ImageIcon(imagePath.toString()));
+                Component add = jPanel10.add(label);
+                jPanel10.revalidate();
+                jPanel10.repaint();
+            }
+            
         }
 
 
@@ -840,20 +857,20 @@ public class UI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        try {
-            JFileChooser chooser = new JFileChooser();
-            chooser.showOpenDialog(null);
-            File f = chooser.getSelectedFile();            
-            byte[] bArray = Files.readAllBytes(f.toPath());
-            ResponseAPDU response = APDU.getInstanse().makeCommand(00, Applet.INS_SET_AVATAR_IMAGE, 00, 00, bArray);
-            if (response.getSW1() == 0x90) {
-                JOptionPane.showMessageDialog(null, "Ghi thành công ");
-            } else {
-                JOptionPane.showMessageDialog(null, "Ghi không thành công");
-            }
-        } catch (IOException e) {
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        String path = f.toString();
+        ResponseAPDU response = APDU.getInstanse().makeCommand(00, Applet.INS_SET_AVATAR_IMAGE, 00, 00, path.getBytes());
+        if (response.getSW1() == 0x90) {
+            jPanel10.removeAll();
+            JLabel label = new JLabel(new ImageIcon(path));
+            Component add = jPanel10.add(label);
+            jPanel10.revalidate();
+            jPanel10.repaint();
+            JOptionPane.showMessageDialog(null, "Ghi thành công ");
+        } else {
             JOptionPane.showMessageDialog(null, "Ghi không thành công");
-            e.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1039,6 +1056,8 @@ public class UI extends javax.swing.JFrame {
         birthDateText.setText("");
         expireDateText.setText("");
         cardTypeText.setText("");
+        jPanel10.removeAll();
+        jPanel10.repaint();
     }
 
     private int mapIndexToViolationCode(int faultIndex) {
