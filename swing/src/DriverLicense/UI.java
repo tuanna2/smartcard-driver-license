@@ -463,7 +463,7 @@ public class UI extends javax.swing.JFrame {
         jPanel34.add(jLabel16);
 
         faultComboBox.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        faultComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vượt quá tốc độ", "Có nồng độ cồn trong máu", "Vượt quá trọng tải quy định", "Vi phạm tín hiệu giao thông", "Thiếu thiết bị bảo hộ", "Đi sai làn đường quy định" }));
+        faultComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vượt quá tốc độ", "Uống rượu bia khi tham gia giao thông", "Vượt quá trọng tải quy định", "Vượt đèn đỏ", "Không đội mũ bảo hiểm", "Đi sai làn đường" }));
         faultComboBox.setPreferredSize(new java.awt.Dimension(200, 32));
         faultComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -862,7 +862,7 @@ public class UI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        File image = new File("C:\\Users\\superuser\\image.png");
+        File image = new File("C:\\Users\\DELL\\logo.png");
         try {
             byte[] bArray = Files.readAllBytes(image.toPath());
             ResponseAPDU response = APDU.getInstanse().makeCommand(00, Applet.INS_SET_AVATAR_IMAGE, 00, 00, bArray);

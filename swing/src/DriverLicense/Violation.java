@@ -47,7 +47,7 @@ public class Violation {
             case LIGHT_SIGNAL_FAULT:
                 return "Vượt đèn đỏ";
             case OVER_WEIGHT_FAULT:
-                return "Vượt quá tải trọng cho phép";
+                return "Vượt quá tải trọng quy định";
             case WRONG_LANE_FAULT:
                 return "Đi sai làn đường";
             case VIOLATE_ALCOHOL_FAULT:
