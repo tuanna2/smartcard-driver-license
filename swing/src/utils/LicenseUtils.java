@@ -2,12 +2,12 @@ package utils;
 
 public class LicenseUtils {
 
-    static final byte CARD_TYPE_A1 = 0x01;
-    static final byte CARD_TYPE_A2 = 0x02;
-    static final byte CARD_TYPE_A3 = 0x03;
+    public static final byte CARD_TYPE_A1 = 0x01;
+    public static final byte CARD_TYPE_A2 = 0x02;
+    public static final byte CARD_TYPE_A3 = 0x03;
     static final byte CARD_TYPE_A4 = 0x04;
-    static final byte CARD_TYPE_B1 = 0x11;
-    static final byte CARD_TYPE_B2 = 0x12;
+    public static final byte CARD_TYPE_B1 = 0x11;
+    public static final byte CARD_TYPE_B2 = 0x12;
     static final byte CARD_TYPE_C = 0x21;
     static final byte CARD_TYPE_D = 0x31;
     static final byte CARD_TYPE_E = 0x41;

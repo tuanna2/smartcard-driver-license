@@ -16,7 +16,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import utils.EncodeUtils;
+import utils.LicenseUtils;
 
 public class UI extends javax.swing.JFrame {
 
@@ -132,6 +134,12 @@ public class UI extends javax.swing.JFrame {
         jPanel60 = new javax.swing.JPanel();
         expireDateTextField = new javax.swing.JFormattedTextField();
         btnChangeExpireDate = new javax.swing.JButton();
+        jPanel61 = new javax.swing.JPanel();
+        jPanel62 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jPanel63 = new javax.swing.JPanel();
+        faultComboBox1 = new javax.swing.JComboBox<>();
+        btnChangeExpireDate1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("License Suite");
@@ -687,6 +695,46 @@ public class UI extends javax.swing.JFrame {
 
         jPanel42.add(jPanel58);
 
+        jPanel61.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel61.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        jPanel61.setLayout(new java.awt.BorderLayout());
+
+        jPanel62.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel62.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+        jPanel62.setPreferredSize(new java.awt.Dimension(120, 309));
+        jPanel62.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        jLabel18.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel18.setText("Loại bằng");
+        jPanel62.add(jLabel18);
+
+        jPanel61.add(jPanel62, java.awt.BorderLayout.LINE_START);
+
+        jPanel63.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel63.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+
+        faultComboBox1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        faultComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A1", "A2", "A3", "B1", "B2" }));
+        faultComboBox1.setPreferredSize(new java.awt.Dimension(350, 32));
+        faultComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                faultComboBox1ActionPerformed(evt);
+            }
+        });
+        jPanel63.add(faultComboBox1);
+
+        btnChangeExpireDate1.setText("OK");
+        btnChangeExpireDate1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeExpireDate1ActionPerformed(evt);
+            }
+        });
+        jPanel63.add(btnChangeExpireDate1);
+
+        jPanel61.add(jPanel63, java.awt.BorderLayout.CENTER);
+
+        jPanel42.add(jPanel61);
+
         rewritePanel.add(jPanel42, java.awt.BorderLayout.CENTER);
 
         jPanel31.add(rewritePanel, "card2");
@@ -857,7 +905,9 @@ public class UI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "gif", "jpeg");
         JFileChooser chooser = new JFileChooser();
+        chooser.setFileFilter(filter);
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
         String path = f.toString();
@@ -909,6 +959,22 @@ public class UI extends javax.swing.JFrame {
         renderLicenseInfo(license);
     }//GEN-LAST:event_jLabel12MousePressed
 
+    private void btnChangeExpireDate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeExpireDate1ActionPerformed
+        // TODO add your handling code here:
+        int typeIndex = faultComboBox1.getSelectedIndex();
+        int typeCode = mapIndexToDriverType(typeIndex);
+        ResponseAPDU response = APDU.getInstanse().makeCommand(00, Applet.INS_SET_CARD_TYPE, (byte)typeCode, 00);
+        if (response.getSW1() == 0x90) {
+            JOptionPane.showMessageDialog(null, "Ghi thành công ");
+        } else {
+            JOptionPane.showMessageDialog(null, "Ghi không thành công");
+        }
+    }//GEN-LAST:event_btnChangeExpireDate1ActionPerformed
+
+    private void faultComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_faultComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_faultComboBox1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -953,6 +1019,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JButton btnChangeBirthDate;
     private javax.swing.JButton btnChangeCardId;
     private javax.swing.JButton btnChangeExpireDate;
+    private javax.swing.JButton btnChangeExpireDate1;
     private javax.swing.JButton btnChangeFullName;
     private javax.swing.JLabel cardIdText;
     private javax.swing.JFormattedTextField cardIdTextField;
@@ -963,6 +1030,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel expireDateText;
     private javax.swing.JFormattedTextField expireDateTextField;
     private javax.swing.JComboBox<String> faultComboBox;
+    private javax.swing.JComboBox<String> faultComboBox1;
     private javax.swing.JFormattedTextField faultDateText;
     private javax.swing.JTextArea faultListView;
     private javax.swing.JPanel faultPanel;
@@ -976,6 +1044,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1032,6 +1101,9 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel59;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel60;
+    private javax.swing.JPanel jPanel61;
+    private javax.swing.JPanel jPanel62;
+    private javax.swing.JPanel jPanel63;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1075,6 +1147,23 @@ public class UI extends javax.swing.JFrame {
             case 5:
                 return Violation.OVER_SPEED_FAULT;
             default:
+                return 0;
+        }
+    }
+    
+    private int mapIndexToDriverType(int typeIndex) {
+        switch(typeIndex) {
+            case 0:
+                return LicenseUtils.CARD_TYPE_A1;
+            case 1:
+                return LicenseUtils.CARD_TYPE_A2;
+            case 2:
+                return LicenseUtils.CARD_TYPE_A3;
+            case 3:
+                return LicenseUtils.CARD_TYPE_B1;
+            case 4:
+                return LicenseUtils.CARD_TYPE_B2;
+            default: 
                 return 0;
         }
     }
