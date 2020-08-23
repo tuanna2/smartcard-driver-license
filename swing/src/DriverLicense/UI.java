@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 import javax.smartcardio.ResponseAPDU;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import utils.APDU;
 import utils.EncodeUtils;
@@ -42,21 +43,18 @@ public class UI extends javax.swing.JFrame {
         connectBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
+        updatePanel = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         checkFaultBtn = new javax.swing.JLabel();
-        updatePanel = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
         rewriteLabel = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel30 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jPanel31 = new javax.swing.JPanel();
         infoPanel = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jPanel30 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
@@ -134,7 +132,7 @@ public class UI extends javax.swing.JFrame {
         btnChangeExpireDate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Driver License");
+        setTitle("License Suite");
         setResizable(false);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(774, 70));
@@ -170,37 +168,29 @@ public class UI extends javax.swing.JFrame {
 
         jPanel7.setPreferredSize(new java.awt.Dimension(774, 50));
 
-        jLabel1.setText("Bằng lái xe");
-        jPanel7.add(jLabel1);
-
-        jPanel2.add(jPanel7, java.awt.BorderLayout.PAGE_START);
-
-        jPanel8.setPreferredSize(new java.awt.Dimension(200, 309));
-        jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
-
-        jPanel12.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel12.setPreferredSize(new java.awt.Dimension(190, 50));
-        jPanel12.setLayout(new java.awt.GridLayout(1, 1, 15, 0));
+        updatePanel.setBackground(new java.awt.Color(54, 236, 130));
+        updatePanel.setPreferredSize(new java.awt.Dimension(190, 50));
+        updatePanel.setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel12.setBackground(new java.awt.Color(204, 255, 204));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Thông tin thẻ");
+        jLabel12.setText("CARD INFO");
         jLabel12.setAlignmentX(0.5F);
         jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel12MousePressed(evt);
             }
         });
-        jPanel12.add(jLabel12);
+        updatePanel.add(jLabel12);
 
-        jPanel8.add(jPanel12);
+        jPanel7.add(updatePanel);
 
-        jPanel13.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel13.setBackground(new java.awt.Color(255, 206, 48));
         jPanel13.setPreferredSize(new java.awt.Dimension(190, 50));
         jPanel13.setLayout(new java.awt.GridLayout(1, 0));
 
         checkFaultBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        checkFaultBtn.setText("Thông tin lỗi");
+        checkFaultBtn.setText("LIST VIOLATION");
         checkFaultBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 checkFaultBtnMousePressed(evt);
@@ -208,56 +198,52 @@ public class UI extends javax.swing.JFrame {
         });
         jPanel13.add(checkFaultBtn);
 
-        jPanel8.add(jPanel13);
+        jPanel7.add(jPanel13);
 
-        updatePanel.setBackground(new java.awt.Color(255, 255, 204));
-        updatePanel.setPreferredSize(new java.awt.Dimension(190, 50));
-        updatePanel.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel12.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel12.setPreferredSize(new java.awt.Dimension(190, 50));
+        jPanel12.setLayout(new java.awt.GridLayout(1, 1, 15, 0));
 
         rewriteLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        rewriteLabel.setText("Ghi lại thẻ");
+        rewriteLabel.setText("UPDATE CARD INFO");
         rewriteLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 rewriteLabelMousePressed(evt);
             }
         });
-        updatePanel.add(rewriteLabel);
+        jPanel12.add(rewriteLabel);
 
-        jPanel8.add(updatePanel);
+        jPanel7.add(jPanel12);
 
-        jPanel2.add(jPanel8, java.awt.BorderLayout.LINE_START);
+        jPanel2.add(jPanel7, java.awt.BorderLayout.PAGE_START);
 
-        jPanel31.setLayout(new java.awt.CardLayout(1, 1));
+        jPanel8.setPreferredSize(new java.awt.Dimension(200, 309));
+        jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        infoPanel.setLayout(new java.awt.BorderLayout());
-
-        jPanel5.setPreferredSize(new java.awt.Dimension(200, 309));
-        jPanel5.setLayout(new java.awt.BorderLayout());
+        jPanel30.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel10.setPreferredSize(new java.awt.Dimension(200, 200));
         jPanel10.setLayout(new java.awt.GridLayout(1, 0));
 
-        jPanel30.setBackground(new java.awt.Color(255, 255, 255));
-
         javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
         jPanel30.setLayout(jPanel30Layout);
         jPanel30Layout.setHorizontalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 198, Short.MAX_VALUE)
+            .addGroup(jPanel30Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel30Layout.setVerticalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 176, Short.MAX_VALUE)
+            .addGroup(jPanel30Layout.createSequentialGroup()
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
-        jPanel10.add(jPanel30);
-
-        jPanel5.add(jPanel10, java.awt.BorderLayout.CENTER);
-
-        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel11.setPreferredSize(new java.awt.Dimension(200, 129));
+        jPanel8.add(jPanel30);
 
         jButton1.setText("Đổi ảnh");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -265,21 +251,23 @@ public class UI extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel11.add(jButton1);
+        jPanel8.add(jButton1);
 
-        jPanel5.add(jPanel11, java.awt.BorderLayout.SOUTH);
+        jPanel2.add(jPanel8, java.awt.BorderLayout.LINE_START);
 
-        infoPanel.add(jPanel5, java.awt.BorderLayout.LINE_START);
+        jPanel31.setLayout(new java.awt.CardLayout(1, 1));
+
+        infoPanel.setLayout(new java.awt.BorderLayout());
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.PAGE_AXIS));
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel14.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        jPanel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel14.setLayout(new java.awt.BorderLayout());
 
         jPanel18.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel18.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+        jPanel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel18.setPreferredSize(new java.awt.Dimension(120, 309));
         jPanel18.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
@@ -287,15 +275,15 @@ public class UI extends javax.swing.JFrame {
         jLabel2.setText("Số thẻ");
         jPanel18.add(jLabel2);
 
-        jPanel14.add(jPanel18, java.awt.BorderLayout.LINE_START);
-
         jPanel19.setBackground(new java.awt.Color(255, 255, 255));
         jPanel19.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
 
         cardIdText.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jPanel19.add(cardIdText);
 
-        jPanel14.add(jPanel19, java.awt.BorderLayout.CENTER);
+        jPanel18.add(jPanel19);
+
+        jPanel14.add(jPanel18, java.awt.BorderLayout.LINE_START);
 
         jPanel6.add(jPanel14);
 
@@ -304,7 +292,7 @@ public class UI extends javax.swing.JFrame {
         jPanel15.setLayout(new java.awt.BorderLayout());
 
         jPanel20.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel20.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+        jPanel20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel20.setPreferredSize(new java.awt.Dimension(120, 309));
         jPanel20.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
@@ -315,7 +303,7 @@ public class UI extends javax.swing.JFrame {
         jPanel15.add(jPanel20, java.awt.BorderLayout.LINE_START);
 
         jPanel21.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel21.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+        jPanel21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         fullNameText.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jPanel21.add(fullNameText);
@@ -329,7 +317,7 @@ public class UI extends javax.swing.JFrame {
         jPanel16.setLayout(new java.awt.BorderLayout());
 
         jPanel22.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel22.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+        jPanel22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel22.setPreferredSize(new java.awt.Dimension(120, 309));
         jPanel22.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
@@ -340,7 +328,7 @@ public class UI extends javax.swing.JFrame {
         jPanel16.add(jPanel22, java.awt.BorderLayout.LINE_START);
 
         jPanel23.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel23.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+        jPanel23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         birthDateText.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jPanel23.add(birthDateText);
@@ -354,7 +342,7 @@ public class UI extends javax.swing.JFrame {
         jPanel17.setLayout(new java.awt.BorderLayout());
 
         jPanel24.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel24.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+        jPanel24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel24.setPreferredSize(new java.awt.Dimension(120, 309));
         jPanel24.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
@@ -365,7 +353,7 @@ public class UI extends javax.swing.JFrame {
         jPanel17.add(jPanel24, java.awt.BorderLayout.LINE_START);
 
         jPanel25.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel25.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+        jPanel25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         addressText.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jPanel25.add(addressText);
@@ -379,7 +367,7 @@ public class UI extends javax.swing.JFrame {
         jPanel26.setLayout(new java.awt.BorderLayout());
 
         jPanel27.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel27.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+        jPanel27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel27.setPreferredSize(new java.awt.Dimension(120, 309));
         jPanel27.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
@@ -390,7 +378,7 @@ public class UI extends javax.swing.JFrame {
         jPanel26.add(jPanel27, java.awt.BorderLayout.LINE_START);
 
         jPanel28.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel28.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+        jPanel28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         cardTypeText.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jPanel28.add(cardTypeText);
@@ -404,7 +392,7 @@ public class UI extends javax.swing.JFrame {
         jPanel32.setLayout(new java.awt.BorderLayout());
 
         jPanel37.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel37.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+        jPanel37.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel37.setPreferredSize(new java.awt.Dimension(120, 309));
         jPanel37.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
@@ -415,7 +403,7 @@ public class UI extends javax.swing.JFrame {
         jPanel32.add(jPanel37, java.awt.BorderLayout.LINE_START);
 
         jPanel38.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel38.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+        jPanel38.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         expireDateText.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jPanel38.add(expireDateText);
@@ -463,7 +451,7 @@ public class UI extends javax.swing.JFrame {
         jPanel34.add(jLabel16);
 
         faultComboBox.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        faultComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vượt quá tốc độ", "Uống rượu bia khi tham gia giao thông", "Vượt quá trọng tải quy định", "Vượt đèn đỏ", "Không đội mũ bảo hiểm", "Đi sai làn đường" }));
+        faultComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vượt quá tốc độ", "Có nồng độ cồn trong máu", "Vượt quá trọng tải quy định", "Vi phạm tín hiệu giao thông", "Thiếu thiết bị bảo hộ", "Đi sai làn đường quy định" }));
         faultComboBox.setPreferredSize(new java.awt.Dimension(200, 32));
         faultComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -718,23 +706,14 @@ public class UI extends javax.swing.JFrame {
         if (APDU.getInstanse().connectCard(EncodeUtils.hexStringToByteArray(Applet.APPLET_AID))) {
             connectBtn.setVisible(false);
             disconnectBtn.setVisible(true);
-            // UserInfo license = Service.getInstanse().getLicenseInfo(APDU.getInstanse().makeCommand(00, Applet.INS_GET_USER_INFO, 00, 00));
-            // renderLicenseInfo(license);
+            UserInfo license = Service.getInstanse().getLicenseInfo(APDU.getInstanse().makeCommand(00, Applet.INS_GET_USER_INFO, 00, 00));
+            renderLicenseInfo(license);
         }
 
 
     }//GEN-LAST:event_connectBtnActionPerformed
 
-    private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
-        // TODO add your handling code here:
-        infoPanel.setVisible(true);
-        faultPanel.setVisible(false);
-        rewritePanel.setVisible(false);
-        UserInfo license = Service.getInstanse().getLicenseInfo(APDU.getInstanse().makeCommand(00, Applet.INS_GET_USER_INFO, 00, 00));
-        renderLicenseInfo(license);
-    }//GEN-LAST:event_jLabel12MousePressed
-
-    private void checkFaultBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkViolationBtnMousePressed
+    private void checkFaultBtnMousePressed(java.awt.event.MouseEvent evt) {                                               
         // TODO add your handling code here:
         try {
             List<Violation> faultList = Service.getInstanse().getViolationList(APDU.getInstanse().makeCommand(00, Applet.INS_GET_LIST_VIOLATION, 00, 00));
@@ -745,7 +724,7 @@ public class UI extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_checkFaultBtnMousePressed
+    }                                          
     
     private void rewriteLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rewriteLabelMousePressed
         // TODO add your handling code here:
@@ -862,9 +841,11 @@ public class UI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        File image = new File("C:\\Users\\DELL\\logo.png");
         try {
-            byte[] bArray = Files.readAllBytes(image.toPath());
+            JFileChooser chooser = new JFileChooser();
+            chooser.showOpenDialog(null);
+            File f = chooser.getSelectedFile();
+            byte[] bArray = Files.readAllBytes(f.toPath());
             ResponseAPDU response = APDU.getInstanse().makeCommand(00, Applet.INS_SET_AVATAR_IMAGE, 00, 00, bArray);
             if (response.getSW1() == 0x90) {
                 JOptionPane.showMessageDialog(null, "Ghi thành công ");
@@ -872,7 +853,7 @@ public class UI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Ghi không thành công");
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            JOptionPane.showMessageDialog(null, "Ghi không thành công");
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -902,6 +883,15 @@ public class UI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ghi không thành công");
         }
     }//GEN-LAST:event_btnChangeExpireDateActionPerformed
+
+    private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
+        // TODO add your handling code here:
+        infoPanel.setVisible(true);
+        faultPanel.setVisible(false);
+        rewritePanel.setVisible(false);
+        UserInfo license = Service.getInstanse().getLicenseInfo(APDU.getInstanse().makeCommand(00, Applet.INS_GET_USER_INFO, 00, 00));
+        renderLicenseInfo(license);
+    }//GEN-LAST:event_jLabel12MousePressed
 
     /**
      * @param args the command line arguments
@@ -964,7 +954,6 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JTextField fullNameTextField;
     private javax.swing.JPanel infoPanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -981,7 +970,6 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
@@ -1019,7 +1007,6 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel47;
     private javax.swing.JPanel jPanel48;
     private javax.swing.JPanel jPanel49;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel50;
     private javax.swing.JPanel jPanel51;
     private javax.swing.JPanel jPanel52;

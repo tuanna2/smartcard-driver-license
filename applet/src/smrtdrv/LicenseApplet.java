@@ -52,6 +52,13 @@ public class LicenseApplet extends Applet {
     releaseDate = new byte[DATE_FORMAT_LENGTH];
     expireDate = new byte[DATE_FORMAT_LENGTH];
     avatarImage = new byte[MAX_IMAGE_SIZE];
+
+    cardIdLen = CARD_ID_LENGTH;
+    fullNameLen = (short) fullName.length;
+    birthDateLen = (short) birthDate.length;
+    addressLen = (short) address.length;
+    releaseDateLen = (short) releaseDate.length;
+    expireDateLen = (short) expireDate.length;
  }
 
   public void process(APDU apdu) {

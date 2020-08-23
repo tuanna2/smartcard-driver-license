@@ -20,7 +20,7 @@ public class Service {
     }
 
     public UserInfo getLicenseInfo(ResponseAPDU response) {
-        UserInfo cardLicense = new UserInfo();
+        UserInfo userInfo = new UserInfo();
         /**
          * get CARD ID
          */
@@ -32,7 +32,7 @@ public class Service {
         for (int i = 0; i < Applet.CARD_ID_LENGTH; i++, pointer++) {
             cardId.append(buffer[i]);
         }
-        cardLicense.setCardId(cardId.toString());
+        userInfo.setCardId(cardId.toString());
         /**
          * get NAME
          */
@@ -42,7 +42,7 @@ public class Service {
         for (int i = pointer; i < cur_pointer + fullNameLen; i++, pointer++) {
             fullName.append(Character.toString((char) buffer[i]));
         }
-        cardLicense.setFullName(fullName.toString());
+        userInfo.setFullName(fullName.toString());
 
         /**
          * get Address
@@ -53,7 +53,7 @@ public class Service {
         for (int i = cur_pointer; i < cur_pointer + addressLen; i++, pointer++) {
             address.append(Character.toString((char) buffer[i]));
         }
-        cardLicense.setAddress(address.toString());
+        userInfo.setAddress(address.toString());
         /**
          * get Birth date
          */
@@ -63,7 +63,7 @@ public class Service {
             String text = (buffer[i] < 10 ? "0" : "") + buffer[i];
             birthDate.append(text);
         }
-        cardLicense.setBirthDate(birthDate.toString());
+        userInfo.setBirthDate(birthDate.toString());
 
         /**
          * get Release date
@@ -74,7 +74,7 @@ public class Service {
             String text = (buffer[i] < 10 ? "0" : "") + buffer[i];
             releaseDate.append(text);
         }
-        cardLicense.setReleaseDate(releaseDate.toString());
+        userInfo.setReleaseDate(releaseDate.toString());
         /**
          * Get expire date
          */
@@ -84,9 +84,9 @@ public class Service {
             String text = (buffer[i] < 10 ? "0" : "") + buffer[i];
             expireDate.append(text);
         }
-        cardLicense.setExpireDate(expireDate.toString());
-        cardLicense.setCardType((int) buffer[pointer]);
-        return cardLicense;
+        userInfo.setExpireDate(expireDate.toString());
+        userInfo.setCardType((int) buffer[pointer]);
+        return userInfo;
     }
 
     public List<Violation> getViolationList(ResponseAPDU response) {

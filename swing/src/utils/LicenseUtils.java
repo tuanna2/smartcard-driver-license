@@ -49,7 +49,7 @@ public class LicenseUtils {
                 return "FE";
 
             default:
-                return "Unkown type!";
+                return "";
         }
     }
 }
