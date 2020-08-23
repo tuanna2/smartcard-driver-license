@@ -14,17 +14,17 @@ public class UserInfo {
     
     private String address;
     
-    private String grantedDate;
+    private String releaseDate;
     
     private String expireDate;
 
-    public UserInfo(String cardId, int cardType, String fullName, String birthDate, String address, String grantedDate, String expireDate) {
+    public UserInfo(String cardId, int cardType, String fullName, String birthDate, String address, String releaseDate, String expireDate) {
         this.cardId = cardId;
         this.cardType = cardType;
         this.fullName = fullName;
         this.birthDate = birthDate;
         this.address = address;
-        this.grantedDate = grantedDate;
+        this.releaseDate = releaseDate;
         this.expireDate = expireDate;
     }
 
@@ -53,8 +53,8 @@ public class UserInfo {
         return address;
     }
 
-    public String getGrantedDate() {
-        return DateUtils.toDateString(grantedDate);
+    public String getReleaseDate() {
+        return DateUtils.toDateString(releaseDate);
     }
 
     public String getExpireDate() {
@@ -81,8 +81,8 @@ public class UserInfo {
         this.address = address;
     }
 
-    public void setGrantedDate(String grantedDate) {
-        this.grantedDate = grantedDate;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public void setExpireDate(String expireDate) {

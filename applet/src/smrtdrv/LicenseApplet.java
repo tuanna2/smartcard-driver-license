@@ -44,7 +44,7 @@ public class LicenseApplet extends Applet {
     new LicenseApplet()
     .register(bArray, (short) (bOffset + 1), bArray[bOffset]);
 
-    cardType = CARD_TYPE_A1;
+    cardType = 0x00;
     cardId = new byte[CARD_ID_LENGTH];
     fullName = new byte[64];
     birthDate = new byte[DATE_FORMAT_LENGTH];

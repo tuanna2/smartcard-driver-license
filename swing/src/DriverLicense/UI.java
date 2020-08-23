@@ -47,7 +47,7 @@ public class UI extends javax.swing.JFrame {
         jPanel12 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
-        checkViolationBtn = new javax.swing.JLabel();
+        checkFaultBtn = new javax.swing.JLabel();
         updatePanel = new javax.swing.JPanel();
         rewriteLabel = new javax.swing.JLabel();
         jPanel31 = new javax.swing.JPanel();
@@ -99,7 +99,7 @@ public class UI extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         faultComboBox = new javax.swing.JComboBox<>();
         faultDateText = new javax.swing.JFormattedTextField();
-        writeViolation = new javax.swing.JButton();
+        writeFault = new javax.swing.JButton();
         rewritePanel = new javax.swing.JPanel();
         jPanel42 = new javax.swing.JPanel();
         jPanel43 = new javax.swing.JPanel();
@@ -134,7 +134,7 @@ public class UI extends javax.swing.JFrame {
         btnChangeExpireDate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("License UI");
+        setTitle("Driver License");
         setResizable(false);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(774, 70));
@@ -170,7 +170,7 @@ public class UI extends javax.swing.JFrame {
 
         jPanel7.setPreferredSize(new java.awt.Dimension(774, 50));
 
-        jLabel1.setText("Nhóm 2 - BẰNG LÁI XE");
+        jLabel1.setText("Bằng lái xe");
         jPanel7.add(jLabel1);
 
         jPanel2.add(jPanel7, java.awt.BorderLayout.PAGE_START);
@@ -199,14 +199,14 @@ public class UI extends javax.swing.JFrame {
         jPanel13.setPreferredSize(new java.awt.Dimension(190, 50));
         jPanel13.setLayout(new java.awt.GridLayout(1, 0));
 
-        checkViolationBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        checkViolationBtn.setText("Thông tin lỗi");
-        checkViolationBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        checkFaultBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        checkFaultBtn.setText("Thông tin lỗi");
+        checkFaultBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                checkViolationBtnMousePressed(evt);
+                checkFaultBtnMousePressed(evt);
             }
         });
-        jPanel13.add(checkViolationBtn);
+        jPanel13.add(checkFaultBtn);
 
         jPanel8.add(jPanel13);
 
@@ -485,13 +485,13 @@ public class UI extends javax.swing.JFrame {
         });
         jPanel34.add(faultDateText);
 
-        writeViolation.setText("GHI");
-        writeViolation.addActionListener(new java.awt.event.ActionListener() {
+        writeFault.setText("GHI");
+        writeFault.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                writeViolationActionPerformed(evt);
+                writeFaultActionPerformed(evt);
             }
         });
-        jPanel34.add(writeViolation);
+        jPanel34.add(writeFault);
 
         faultPanel.add(jPanel34, java.awt.BorderLayout.SOUTH);
 
@@ -718,8 +718,8 @@ public class UI extends javax.swing.JFrame {
         if (APDU.getInstanse().connectCard(EncodeUtils.hexStringToByteArray(Applet.APPLET_AID))) {
             connectBtn.setVisible(false);
             disconnectBtn.setVisible(true);
-            UserInfo license = Service.getInstanse().getLicenseInfo(APDU.getInstanse().makeCommand(00, Applet.INS_GET_USER_INFO, 00, 00));
-            renderLicenseInfo(license);
+            // UserInfo license = Service.getInstanse().getLicenseInfo(APDU.getInstanse().makeCommand(00, Applet.INS_GET_USER_INFO, 00, 00));
+            // renderLicenseInfo(license);
         }
 
 
@@ -734,7 +734,7 @@ public class UI extends javax.swing.JFrame {
         renderLicenseInfo(license);
     }//GEN-LAST:event_jLabel12MousePressed
 
-    private void checkViolationBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkViolationBtnMousePressed
+    private void checkFaultBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkViolationBtnMousePressed
         // TODO add your handling code here:
         try {
             List<Violation> faultList = Service.getInstanse().getViolationList(APDU.getInstanse().makeCommand(00, Applet.INS_GET_LIST_VIOLATION, 00, 00));
@@ -745,8 +745,8 @@ public class UI extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_checkViolationBtnMousePressed
-
+    }//GEN-LAST:event_checkFaultBtnMousePressed
+    
     private void rewriteLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rewriteLabelMousePressed
         // TODO add your handling code here:
         infoPanel.setVisible(false);
@@ -767,7 +767,7 @@ public class UI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_faultComboBoxActionPerformed
 
-    private void writeViolationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_writeViolationActionPerformed
+    private void writeFaultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_writeFaultActionPerformed
         // TODO add your handling code here:
         try {
             int faultIndex = faultComboBox.getSelectedIndex();
@@ -793,7 +793,7 @@ public class UI extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_writeViolationActionPerformed
+    }//GEN-LAST:event_writeFaultActionPerformed
 
     private void btnChangeCardIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeCardIdActionPerformed
         // TODO add your handling code here:
@@ -821,7 +821,7 @@ public class UI extends javax.swing.JFrame {
         String text = fullNameTextField.getText();
         ResponseAPDU response = APDU.getInstanse().makeCommand(00, Applet.INS_SET_FULLNAME, 00, 00, text.getBytes());
         if (response.getSW1() == 0x90) {
-            JOptionPane.showMessageDialog(null, "Ghi thành công ");
+            JOptionPane.showMessageDialog(null, "Ghi thành công");
         } else {
             JOptionPane.showMessageDialog(null, "Ghi không thành công");
         }
@@ -951,7 +951,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel cardIdText;
     private javax.swing.JFormattedTextField cardIdTextField;
     private javax.swing.JLabel cardTypeText;
-    private javax.swing.JLabel checkViolationBtn;
+    private javax.swing.JLabel checkFaultBtn;
     private javax.swing.JButton connectBtn;
     private javax.swing.JButton disconnectBtn;
     private javax.swing.JLabel expireDateText;
@@ -1035,7 +1035,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel rewriteLabel;
     private javax.swing.JPanel rewritePanel;
     private javax.swing.JPanel updatePanel;
-    private javax.swing.JButton writeViolation;
+    private javax.swing.JButton writeFault;
     // End of variables declaration//GEN-END:variables
     private void renderLicenseInfo(UserInfo license) {
         cardIdText.setText(license.getCardId());

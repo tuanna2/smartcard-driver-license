@@ -116,7 +116,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="B&#x1eb0;NG L&#xc1;I XE TH&#xd4;NG MINH - SMART DRIVING LICENSE SUITE"/>
+                <Property name="text" type="java.lang.String" value="B&#x1eb1;ng l&#xe1;i xe"/>
               </Properties>
             </Component>
           </SubComponents>

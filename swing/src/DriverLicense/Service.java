@@ -66,15 +66,15 @@ public class Service {
         cardLicense.setBirthDate(birthDate.toString());
 
         /**
-         * get Granted date
+         * get Release date
          */
-        StringBuilder grantedDate = new StringBuilder();
+        StringBuilder releaseDate = new StringBuilder();
         cur_pointer = pointer;
         for (int i = cur_pointer; i < cur_pointer + Applet.DATE_FORMAT_LENGTH; i++, pointer++) {
             String text = (buffer[i] < 10 ? "0" : "") + buffer[i];
-            grantedDate.append(text);
+            releaseDate.append(text);
         }
-        cardLicense.setGrantedDate(grantedDate.toString());
+        cardLicense.setReleaseDate(releaseDate.toString());
         /**
          * Get expire date
          */
