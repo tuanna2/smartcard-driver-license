@@ -13,7 +13,6 @@ import java.util.List;
 import javax.smartcardio.ResponseAPDU;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import utils.APDU;
 import utils.EncodeUtils;
 
 public class UI extends javax.swing.JFrame {
@@ -132,7 +131,7 @@ public class UI extends javax.swing.JFrame {
         btnChangeExpireDate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Bằng lái xe");
+        setTitle("License Suite");
         setResizable(false);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(774, 70));
@@ -144,7 +143,7 @@ public class UI extends javax.swing.JFrame {
 
         jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 15, 15));
 
-        disconnectBtn.setText("Ngắt kết nối");
+        disconnectBtn.setText("Disconnect");
         disconnectBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 disconnectBtnActionPerformed(evt);
@@ -152,7 +151,7 @@ public class UI extends javax.swing.JFrame {
         });
         jPanel4.add(disconnectBtn);
 
-        connectBtn.setText("Kết nối");
+        connectBtn.setText("Connect");
         connectBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 connectBtnActionPerformed(evt);
@@ -272,8 +271,10 @@ public class UI extends javax.swing.JFrame {
         jPanel18.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel2.setText("Số thẻ");
+        jLabel2.setText("ID");
         jPanel18.add(jLabel2);
+
+        jPanel14.add(jPanel18, java.awt.BorderLayout.LINE_START);
 
         jPanel19.setBackground(new java.awt.Color(255, 255, 255));
         jPanel19.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
@@ -281,9 +282,7 @@ public class UI extends javax.swing.JFrame {
         cardIdText.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jPanel19.add(cardIdText);
 
-        jPanel18.add(jPanel19);
-
-        jPanel14.add(jPanel18, java.awt.BorderLayout.LINE_START);
+        jPanel14.add(jPanel19, java.awt.BorderLayout.CENTER);
 
         jPanel6.add(jPanel14);
 
@@ -372,7 +371,7 @@ public class UI extends javax.swing.JFrame {
         jPanel27.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel10.setText("Hạng bằng");
+        jLabel10.setText("Loại bằng");
         jPanel27.add(jLabel10);
 
         jPanel26.add(jPanel27, java.awt.BorderLayout.LINE_START);
@@ -451,7 +450,7 @@ public class UI extends javax.swing.JFrame {
         jPanel34.add(jLabel16);
 
         faultComboBox.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        faultComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vượt quá tốc độ", "Có nồng độ cồn trong máu", "Vượt quá trọng tải quy định", "Vi phạm tín hiệu giao thông", "Thiếu thiết bị bảo hộ", "Đi sai làn đường quy định" }));
+        faultComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Không đội mũ bảo hiểm", "Vượt đèn đỏ", "Vượt quá tải trọng quy định", "Đi sai làn đường", "Uống rượu bia khi tham gia giao thông", "Vượt quá tốc độ" }));
         faultComboBox.setPreferredSize(new java.awt.Dimension(200, 32));
         faultComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -844,7 +843,7 @@ public class UI extends javax.swing.JFrame {
         try {
             JFileChooser chooser = new JFileChooser();
             chooser.showOpenDialog(null);
-            File f = chooser.getSelectedFile();
+            File f = chooser.getSelectedFile();            
             byte[] bArray = Files.readAllBytes(f.toPath());
             ResponseAPDU response = APDU.getInstanse().makeCommand(00, Applet.INS_SET_AVATAR_IMAGE, 00, 00, bArray);
             if (response.getSW1() == 0x90) {
@@ -1045,17 +1044,17 @@ public class UI extends javax.swing.JFrame {
     private int mapIndexToViolationCode(int faultIndex) {
         switch (faultIndex) {
             case 0:
-                return Violation.OVER_SPEED_FAULT;
+                return Violation.MISSING_EQUIPMENT_FAULT;
             case 1:
-                return Violation.VIOLATE_ALCOHOL_FAULT;
+                return Violation.LIGHT_SIGNAL_FAULT;
             case 2:
                 return Violation.OVER_WEIGHT_FAULT;
             case 3:
-                return Violation.LIGHT_SIGNAL_FAULT;
-            case 4:
-                return Violation.MISSING_EQUIPMENT_FAULT;
-            case 5:
                 return Violation.WRONG_LANE_FAULT;
+            case 4:
+                return Violation.VIOLATE_ALCOHOL_FAULT;
+            case 5:
+                return Violation.OVER_SPEED_FAULT;
             default:
                 return 0;
         }

@@ -1,7 +1,7 @@
 <JavaCardProject name="DriverLicense">
 <USER>
-<PKG name="smrtdrv" aid="00 11 22 33 44" major="1" minor="0">
-<APPLET aid="00 11 22 33 44 00" instanceaid="" parameter="" authority="" privileges="" index="1656" name="LicenseApplet"/>
+<PKG name="DriverLicense" aid="11 22 33 44 55" major="1" minor="0">
+<APPLET aid="11 22 33 44 55 00" instanceaid="" parameter="" authority="" privileges="" index="-19672" name="DriverLicense"/>
 </PKG>
 <Libs/>
 </USER>

@@ -2,7 +2,7 @@ package DriverLicense;
 
 public interface Applet {
 
-    static final String APPLET_AID = "001122334400";
+    static final String APPLET_AID = "112233445500";
 
     static final short CARD_ID_LENGTH = 0x08;
     static final short DATE_FORMAT_LENGTH = 0x04;
