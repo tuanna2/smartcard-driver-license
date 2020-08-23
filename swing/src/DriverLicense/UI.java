@@ -132,7 +132,7 @@ public class UI extends javax.swing.JFrame {
         btnChangeExpireDate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("License Suite");
+        setTitle("Bằng lái xe");
         setResizable(false);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(774, 70));
