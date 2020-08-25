@@ -109,37 +109,34 @@ public class UI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel45 = new javax.swing.JPanel();
         cardIdTextField = new javax.swing.JFormattedTextField();
-        btnChangeCardId = new javax.swing.JButton();
         jPanel46 = new javax.swing.JPanel();
         jPanel47 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jPanel48 = new javax.swing.JPanel();
         fullNameTextField = new javax.swing.JTextField();
-        btnChangeFullName = new javax.swing.JButton();
         jPanel49 = new javax.swing.JPanel();
         jPanel50 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel51 = new javax.swing.JPanel();
         birthDateTextField = new javax.swing.JFormattedTextField();
-        btnChangeBirthDate = new javax.swing.JButton();
         jPanel52 = new javax.swing.JPanel();
         jPanel53 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jPanel54 = new javax.swing.JPanel();
         addressTextField = new javax.swing.JTextField();
-        btnChangeAddress = new javax.swing.JButton();
         jPanel58 = new javax.swing.JPanel();
         jPanel59 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jPanel60 = new javax.swing.JPanel();
         expireDateTextField = new javax.swing.JFormattedTextField();
-        btnChangeExpireDate = new javax.swing.JButton();
         jPanel61 = new javax.swing.JPanel();
         jPanel62 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jPanel63 = new javax.swing.JPanel();
         faultComboBox1 = new javax.swing.JComboBox<>();
+        jPanel64 = new javax.swing.JPanel();
         btnChangeExpireDate1 = new javax.swing.JButton();
+        jPanel65 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("License Suite");
@@ -531,14 +528,6 @@ public class UI extends javax.swing.JFrame {
         });
         jPanel45.add(cardIdTextField);
 
-        btnChangeCardId.setText("OK");
-        btnChangeCardId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChangeCardIdActionPerformed(evt);
-            }
-        });
-        jPanel45.add(btnChangeCardId);
-
         jPanel43.add(jPanel45, java.awt.BorderLayout.CENTER);
 
         jPanel42.add(jPanel43);
@@ -563,14 +552,6 @@ public class UI extends javax.swing.JFrame {
 
         fullNameTextField.setPreferredSize(new java.awt.Dimension(350, 35));
         jPanel48.add(fullNameTextField);
-
-        btnChangeFullName.setText("OK");
-        btnChangeFullName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChangeFullNameActionPerformed(evt);
-            }
-        });
-        jPanel48.add(btnChangeFullName);
 
         jPanel46.add(jPanel48, java.awt.BorderLayout.CENTER);
 
@@ -607,14 +588,6 @@ public class UI extends javax.swing.JFrame {
         });
         jPanel51.add(birthDateTextField);
 
-        btnChangeBirthDate.setText("OK");
-        btnChangeBirthDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChangeBirthDateActionPerformed(evt);
-            }
-        });
-        jPanel51.add(btnChangeBirthDate);
-
         jPanel49.add(jPanel51, java.awt.BorderLayout.CENTER);
 
         jPanel42.add(jPanel49);
@@ -639,14 +612,6 @@ public class UI extends javax.swing.JFrame {
 
         addressTextField.setPreferredSize(new java.awt.Dimension(350, 35));
         jPanel54.add(addressTextField);
-
-        btnChangeAddress.setText("OK");
-        btnChangeAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChangeAddressActionPerformed(evt);
-            }
-        });
-        jPanel54.add(btnChangeAddress);
 
         jPanel52.add(jPanel54, java.awt.BorderLayout.CENTER);
 
@@ -683,14 +648,6 @@ public class UI extends javax.swing.JFrame {
         });
         jPanel60.add(expireDateTextField);
 
-        btnChangeExpireDate.setText("OK");
-        btnChangeExpireDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChangeExpireDateActionPerformed(evt);
-            }
-        });
-        jPanel60.add(btnChangeExpireDate);
-
         jPanel58.add(jPanel60, java.awt.BorderLayout.CENTER);
 
         jPanel42.add(jPanel58);
@@ -723,17 +680,28 @@ public class UI extends javax.swing.JFrame {
         });
         jPanel63.add(faultComboBox1);
 
-        btnChangeExpireDate1.setText("OK");
+        jPanel61.add(jPanel63, java.awt.BorderLayout.CENTER);
+
+        jPanel42.add(jPanel61);
+
+        jPanel64.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel64.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+        jPanel64.setPreferredSize(new java.awt.Dimension(120, 309));
+        jPanel64.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        btnChangeExpireDate1.setText("Lưu lại");
         btnChangeExpireDate1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChangeExpireDate1ActionPerformed(evt);
             }
         });
-        jPanel63.add(btnChangeExpireDate1);
+        jPanel64.add(btnChangeExpireDate1);
 
-        jPanel61.add(jPanel63, java.awt.BorderLayout.CENTER);
+        jPanel42.add(jPanel64);
 
-        jPanel42.add(jPanel61);
+        jPanel65.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel65.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+        jPanel42.add(jPanel65);
 
         rewritePanel.add(jPanel42, java.awt.BorderLayout.CENTER);
 
@@ -838,67 +806,6 @@ public class UI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_writeFaultActionPerformed
 
-    private void btnChangeCardIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeCardIdActionPerformed
-        // TODO add your handling code here:
-        String text = cardIdTextField.getText();
-        if (text.length() != Applet.CARD_ID_LENGTH) {
-            JOptionPane.showMessageDialog(null, "Mã thẻ phải đủ 8 chữ số");
-            return;
-        }
-        String temp[] = text.split("");
-        byte[] cdata = new byte[temp.length];
-        int i = 0;
-        for (String x : temp) {
-            cdata[i++] = (byte) Integer.parseInt(x);
-        }
-        ResponseAPDU response = APDU.getInstanse().makeCommand(00, Applet.INS_SET_CARD_ID, 00, 00, cdata);
-        if (response.getSW1() == 0x90) {
-            JOptionPane.showMessageDialog(null, "Ghi thành công ");
-        } else {
-            JOptionPane.showMessageDialog(null, "Ghi không thành công");
-        }
-    }//GEN-LAST:event_btnChangeCardIdActionPerformed
-
-    private void btnChangeFullNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeFullNameActionPerformed
-        // TODO add your handling code here:
-        String text = fullNameTextField.getText();
-        ResponseAPDU response = APDU.getInstanse().makeCommand(00, Applet.INS_SET_FULLNAME, 00, 00, text.getBytes());
-        if (response.getSW1() == 0x90) {
-            JOptionPane.showMessageDialog(null, "Ghi thành công");
-        } else {
-            JOptionPane.showMessageDialog(null, "Ghi không thành công");
-        }
-    }//GEN-LAST:event_btnChangeFullNameActionPerformed
-
-    private void btnChangeBirthDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeBirthDateActionPerformed
-        // TODO add your handling code here:
-        String text = birthDateTextField.getText();
-        String splitedDate[] = text.split("/");
-        int date = Integer.parseInt(splitedDate[0]);
-        int month = Integer.parseInt(splitedDate[1]);
-        int yearX = Integer.parseInt(splitedDate[2].charAt(0) + "" + splitedDate[2].charAt(1));
-        int yearY = Integer.parseInt(splitedDate[2].charAt(2) + "" + splitedDate[2].charAt(3));
-        byte[] cdata = new byte[]{(byte) date, (byte) month, (byte) yearX, (byte) yearY};
-        System.out.println(Arrays.toString(text.getBytes()));
-        ResponseAPDU response = APDU.getInstanse().makeCommand(00, Applet.INS_SET_BIRTH_DATE, 00, 00, cdata);
-        if (response.getSW1() == 0x90) {
-            JOptionPane.showMessageDialog(null, "Ghi thành công ");
-        } else {
-            JOptionPane.showMessageDialog(null, "Ghi không thành công");
-        }
-    }//GEN-LAST:event_btnChangeBirthDateActionPerformed
-
-    private void btnChangeAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeAddressActionPerformed
-        // TODO add your handling code here:
-        String text = addressTextField.getText();
-        ResponseAPDU response = APDU.getInstanse().makeCommand(00, Applet.INS_SET_ADDRESS, 00, 00, text.getBytes());
-        if (response.getSW1() == 0x90) {
-            JOptionPane.showMessageDialog(null, "Ghi thành công ");
-        } else {
-            JOptionPane.showMessageDialog(null, "Ghi không thành công");
-        }
-    }//GEN-LAST:event_btnChangeAddressActionPerformed
-
     private void birthDateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birthDateTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_birthDateTextFieldActionPerformed
@@ -932,24 +839,6 @@ public class UI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_expireDateTextFieldActionPerformed
 
-    private void btnChangeExpireDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeExpireDateActionPerformed
-        // TODO add your handling code here:
-        String text = expireDateTextField.getText();
-        String splitedDate[] = text.split("/");
-        int date = Integer.parseInt(splitedDate[0]);
-        int month = Integer.parseInt(splitedDate[1]);
-        int yearX = Integer.parseInt(splitedDate[2].charAt(0) + "" + splitedDate[2].charAt(1));
-        int yearY = Integer.parseInt(splitedDate[2].charAt(2) + "" + splitedDate[2].charAt(3));
-        byte[] cdata = new byte[]{(byte) date, (byte) month, (byte) yearX, (byte) yearY};
-        System.out.println(Arrays.toString(text.getBytes()));
-        ResponseAPDU response = APDU.getInstanse().makeCommand(00, Applet.INS_SET_EXPIRE_DATE, 00, 00, cdata);
-        if (response.getSW1() == 0x90) {
-            JOptionPane.showMessageDialog(null, "Ghi thành công ");
-        } else {
-            JOptionPane.showMessageDialog(null, "Ghi không thành công");
-        }
-    }//GEN-LAST:event_btnChangeExpireDateActionPerformed
-
     private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
         // TODO add your handling code here:
         infoPanel.setVisible(true);
@@ -961,13 +850,64 @@ public class UI extends javax.swing.JFrame {
 
     private void btnChangeExpireDate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeExpireDate1ActionPerformed
         // TODO add your handling code here:
+        String cardId = cardIdTextField.getText();
+        if (cardId.length() != Applet.CARD_ID_LENGTH) {
+            JOptionPane.showMessageDialog(null, "Mã thẻ phải đủ 8 chữ số");
+            return;
+        }
+        String temp[] = cardId.split("");
+        byte[] cdataCardId = new byte[temp.length];
+        int i = 0;
+        for (String x : temp) {
+            cdataCardId[i++] = (byte) Integer.parseInt(x);
+        }
+        ResponseAPDU responseId = APDU.getInstanse().makeCommand(00, Applet.INS_SET_CARD_ID, 00, 00, cdataCardId);
+        if (responseId.getSW1() != 0x90) {
+            JOptionPane.showMessageDialog(null, "Ghi ID không thành công ");
+        }
+        
+        String fullName = fullNameTextField.getText();
+        ResponseAPDU responseName = APDU.getInstanse().makeCommand(00, Applet.INS_SET_FULLNAME, 00, 00, fullName.getBytes());
+        if (responseName.getSW1() != 0x90) {
+            JOptionPane.showMessageDialog(null, "Ghi họ tên không thành công ");
+        }
+        
+        String dob = birthDateTextField.getText();
+        String splitedDate[] = dob.split("/");
+        int date = Integer.parseInt(splitedDate[0]);
+        int month = Integer.parseInt(splitedDate[1]);
+        int yearX = Integer.parseInt(splitedDate[2].charAt(0) + "" + splitedDate[2].charAt(1));
+        int yearY = Integer.parseInt(splitedDate[2].charAt(2) + "" + splitedDate[2].charAt(3));
+        byte[] cdataDob = new byte[]{(byte) date, (byte) month, (byte) yearX, (byte) yearY};
+        ResponseAPDU responseDob = APDU.getInstanse().makeCommand(00, Applet.INS_SET_BIRTH_DATE, 00, 00, cdataDob);
+        if (responseDob.getSW1() != 0x90) {
+            JOptionPane.showMessageDialog(null, "Ghi ngày sinh không thành công ");
+        }
+        
+        String address = addressTextField.getText();
+        ResponseAPDU responseAddress = APDU.getInstanse().makeCommand(00, Applet.INS_SET_ADDRESS, 00, 00, address.getBytes());
+        if (responseAddress.getSW1() != 0x90) {
+            JOptionPane.showMessageDialog(null, "Ghi địa chỉ không thành công ");
+        }
+        
+        String dateInput = expireDateTextField.getText();
+        String splitedDateExpired[] = dateInput.split("/");
+        int dateExpired = Integer.parseInt(splitedDateExpired[0]);
+        int monthExpired = Integer.parseInt(splitedDateExpired[1]);
+        int yearXExpired = Integer.parseInt(splitedDateExpired[2].charAt(0) + "" + splitedDateExpired[2].charAt(1));
+        int yearYExpired = Integer.parseInt(splitedDateExpired[2].charAt(2) + "" + splitedDateExpired[2].charAt(3));
+        byte[] cdataExpiredDate = new byte[]{(byte) dateExpired, (byte) monthExpired, (byte) yearXExpired, (byte) yearYExpired};
+        ResponseAPDU responseExpiredDate = APDU.getInstanse().makeCommand(00, Applet.INS_SET_EXPIRE_DATE, 00, 00, cdataExpiredDate);
+        if (responseExpiredDate.getSW1() != 0x90) {
+            JOptionPane.showMessageDialog(null, "Ghi ngày hết hạn không thành công ");
+        }
         int typeIndex = faultComboBox1.getSelectedIndex();
         int typeCode = mapIndexToDriverType(typeIndex);
-        ResponseAPDU response = APDU.getInstanse().makeCommand(00, Applet.INS_SET_CARD_TYPE, (byte)typeCode, 00);
-        if (response.getSW1() == 0x90) {
+        ResponseAPDU responseType = APDU.getInstanse().makeCommand(00, Applet.INS_SET_CARD_TYPE, (byte)typeCode, 00);
+        if (responseType.getSW1() == 0x90) {
             JOptionPane.showMessageDialog(null, "Ghi thành công ");
         } else {
-            JOptionPane.showMessageDialog(null, "Ghi không thành công");
+            JOptionPane.showMessageDialog(null, "Ghi loại bằng không thành công");
         }
     }//GEN-LAST:event_btnChangeExpireDate1ActionPerformed
 
@@ -1015,12 +955,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JTextField addressTextField;
     private javax.swing.JLabel birthDateText;
     private javax.swing.JFormattedTextField birthDateTextField;
-    private javax.swing.JButton btnChangeAddress;
-    private javax.swing.JButton btnChangeBirthDate;
-    private javax.swing.JButton btnChangeCardId;
-    private javax.swing.JButton btnChangeExpireDate;
     private javax.swing.JButton btnChangeExpireDate1;
-    private javax.swing.JButton btnChangeFullName;
     private javax.swing.JLabel cardIdText;
     private javax.swing.JFormattedTextField cardIdTextField;
     private javax.swing.JLabel cardTypeText;
@@ -1104,6 +1039,8 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel61;
     private javax.swing.JPanel jPanel62;
     private javax.swing.JPanel jPanel63;
+    private javax.swing.JPanel jPanel64;
+    private javax.swing.JPanel jPanel65;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
