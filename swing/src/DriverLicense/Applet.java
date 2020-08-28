@@ -3,8 +3,12 @@ package DriverLicense;
 public interface Applet {
 
     static final String APPLET_AID = "112233445500";
-
+    static final byte INS_INIT_PIN = 0x21;
+    static final byte INS_VERIFY_PIN = 0x22;
+  
     static final short CARD_ID_LENGTH = 0x08;
+    static final short PIN_LENGTH = 0x04;
+
     static final short DATE_FORMAT_LENGTH = 0x04;
     static final int MAX_IMAGE_SIZE = 8192;
 

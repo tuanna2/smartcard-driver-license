@@ -14,8 +14,11 @@ import java.util.List;
 import javax.smartcardio.ResponseAPDU;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import utils.EncodeUtils;
 import utils.LicenseUtils;
@@ -104,6 +107,11 @@ public class UI extends javax.swing.JFrame {
         writeFault = new javax.swing.JButton();
         rewritePanel = new javax.swing.JPanel();
         jPanel42 = new javax.swing.JPanel();
+        jPanel55 = new javax.swing.JPanel();
+        jPanel56 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel57 = new javax.swing.JPanel();
+        cardIdTextField1 = new javax.swing.JFormattedTextField();
         jPanel43 = new javax.swing.JPanel();
         jPanel44 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -181,7 +189,7 @@ public class UI extends javax.swing.JFrame {
 
         jLabel12.setBackground(new java.awt.Color(204, 255, 204));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("CARD INFO");
+        jLabel12.setText("Thông tin thẻ");
         jLabel12.setAlignmentX(0.5F);
         jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -197,7 +205,7 @@ public class UI extends javax.swing.JFrame {
         jPanel13.setLayout(new java.awt.GridLayout(1, 0));
 
         checkFaultBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        checkFaultBtn.setText("LIST VIOLATION");
+        checkFaultBtn.setText("Danh sách lỗi");
         checkFaultBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 checkFaultBtnMousePressed(evt);
@@ -212,7 +220,7 @@ public class UI extends javax.swing.JFrame {
         jPanel12.setLayout(new java.awt.GridLayout(1, 1, 15, 0));
 
         rewriteLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        rewriteLabel.setText("UPDATE CARD INFO");
+        rewriteLabel.setText("Cập nhật thông tin");
         rewriteLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 rewriteLabelMousePressed(evt);
@@ -497,6 +505,41 @@ public class UI extends javax.swing.JFrame {
         jPanel42.setBackground(new java.awt.Color(255, 255, 255));
         jPanel42.setLayout(new javax.swing.BoxLayout(jPanel42, javax.swing.BoxLayout.PAGE_AXIS));
 
+        jPanel55.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel55.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        jPanel55.setLayout(new java.awt.BorderLayout());
+
+        jPanel56.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel56.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+        jPanel56.setPreferredSize(new java.awt.Dimension(120, 309));
+        jPanel56.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        jLabel13.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel13.setText("Mã PIN");
+        jPanel56.add(jLabel13);
+
+        jPanel55.add(jPanel56, java.awt.BorderLayout.LINE_START);
+
+        jPanel57.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel57.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 1));
+
+        try {
+            cardIdTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        cardIdTextField1.setPreferredSize(new java.awt.Dimension(350, 35));
+        cardIdTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cardIdTextField1ActionPerformed(evt);
+            }
+        });
+        jPanel57.add(cardIdTextField1);
+
+        jPanel55.add(jPanel57, java.awt.BorderLayout.CENTER);
+
+        jPanel42.add(jPanel55);
+
         jPanel43.setBackground(new java.awt.Color(255, 255, 255));
         jPanel43.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         jPanel43.setLayout(new java.awt.BorderLayout());
@@ -720,6 +763,7 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_faultDateTextActionPerformed
 
     private void connectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectBtnActionPerformed
+
         // TODO add your handling code here:
         if (APDU.getInstanse().connectCard(EncodeUtils.hexStringToByteArray(Applet.APPLET_AID))) {
             connectBtn.setVisible(false);
@@ -781,6 +825,35 @@ public class UI extends javax.swing.JFrame {
     private void writeFaultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_writeFaultActionPerformed
         // TODO add your handling code here:
         try {
+            JPanel pinPanel = new JPanel();
+            JLabel pinLabel = new JLabel("Xác nhận mã pin:");
+            JPasswordField pinInput = new JPasswordField(10);
+            pinPanel.add(pinLabel);
+            pinPanel.add(pinInput);
+            String[] options = new String[]{"Huỷ", "OK"};
+            int option = JOptionPane.showOptionDialog(null, pinPanel, "Nhập mã pin",
+                JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,null, options, options[1]);
+            if(option != 1){
+                return;
+            }
+            char[] pinChar = pinInput.getPassword();
+            String pin = new String(pinChar);
+
+            if (pin.length() != 4) {
+                JOptionPane.showMessageDialog(null, "Mã PIN sai");
+                return;
+            }
+            String tempPin[] = pin.split("");
+            byte[] cdataPin = new byte[tempPin.length];
+            int j = 0;
+            for (String x : tempPin) {
+                cdataPin[j++] = (byte) Integer.parseInt(x);
+            }
+            ResponseAPDU responsePin = APDU.getInstanse().makeCommand(00, Applet.INS_VERIFY_PIN, 00, 00, cdataPin);
+            if (responsePin.getSW1() == 0x90) {
+                JOptionPane.showMessageDialog(null, "Mã PIN sai");
+                return;
+            }
             int faultIndex = faultComboBox.getSelectedIndex();
             int faultCode = mapIndexToViolationCode(faultIndex);
             String faultDate = this.faultDateText.getText();
@@ -850,8 +923,25 @@ public class UI extends javax.swing.JFrame {
 
     private void btnChangeExpireDate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeExpireDate1ActionPerformed
         // TODO add your handling code here:
+          String pin = cardIdTextField1.getText();
+        if (pin.length() != 4) {
+            JOptionPane.showMessageDialog(null, "Mã PIN phải đủ 4 chữ số");
+            return;
+        }
+        String tempPin[] = pin.split("");
+        byte[] cdataPin = new byte[tempPin.length];
+        int j = 0;
+        for (String x : tempPin) {
+            cdataPin[j++] = (byte) Integer.parseInt(x);
+        }
+        ResponseAPDU responsePin = APDU.getInstanse().makeCommand(00, Applet.INS_INIT_PIN, 00, 00, cdataPin);
+        if (responsePin.getSW1() != 0x90) {
+            JOptionPane.showMessageDialog(null, "Ghi mã PIN không thành công ");
+            return;
+        }
+        
         String cardId = cardIdTextField.getText();
-        if (cardId.length() != Applet.CARD_ID_LENGTH) {
+        if (cardId.length() != 8) {
             JOptionPane.showMessageDialog(null, "Mã thẻ phải đủ 8 chữ số");
             return;
         }
@@ -915,6 +1005,10 @@ public class UI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_faultComboBox1ActionPerformed
 
+    private void cardIdTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardIdTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cardIdTextField1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -958,6 +1052,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JButton btnChangeExpireDate1;
     private javax.swing.JLabel cardIdText;
     private javax.swing.JFormattedTextField cardIdTextField;
+    private javax.swing.JFormattedTextField cardIdTextField1;
     private javax.swing.JLabel cardTypeText;
     private javax.swing.JLabel checkFaultBtn;
     private javax.swing.JButton connectBtn;
@@ -976,6 +1071,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -1032,6 +1128,9 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel52;
     private javax.swing.JPanel jPanel53;
     private javax.swing.JPanel jPanel54;
+    private javax.swing.JPanel jPanel55;
+    private javax.swing.JPanel jPanel56;
+    private javax.swing.JPanel jPanel57;
     private javax.swing.JPanel jPanel58;
     private javax.swing.JPanel jPanel59;
     private javax.swing.JPanel jPanel6;
