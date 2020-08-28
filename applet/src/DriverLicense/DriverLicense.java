@@ -26,12 +26,12 @@ public class DriverLicense extends Applet {
   static final byte INS_INIT_PIN = 0x21;
   static final byte INS_VERIFY_PIN = 0x22;
 
-  private Key tempDesKey3;
-  private byte desKeyLen;
-  private byte[] desKey;
-  private byte[] desICV;
-  private Cipher desEcbCipher;
-  private Cipher desCbcCipher;
+  private static Key tempDesKey3;
+  private static short desKeyLen;
+  private static byte[] desKey = new byte[] {'N', 'G', 'U', 'Y', 'E','N', 'A', 'N', 'H', 'T', 'U','A', 'N','N', 'G', 'U', 'Y', 'E','N', 'A', 'N', 'H', 'T', 'U','A'};
+  private static byte[] desICV = new byte[]{'T','U','A','N','H','I','E','U'};
+  private static Cipher desEcbCipher;
+  private static Cipher desCbcCipher;
 
   static final short CARD_ID_LENGTH = 0x08;
   static final short DATE_FORMAT_LENGTH = 0x04;
@@ -39,9 +39,10 @@ public class DriverLicense extends Applet {
 
   private static byte cardType;
 
-  private static byte[] pin, cardId, fullName, birthDate, address, releaseDate, expireDate, avatarImage;
+  private static byte[] pinInput, pin, cardId, fullName, birthDate, address, releaseDate, expireDate, avatarImage;
 
   private static short pinLen, cardIdLen, fullNameLen, birthDateLen, addressLen, releaseDateLen, expireDateLen, avatarImageLen;
+  
 
   private byte[] listViolation = new byte[] { 
     0x00, 0x00, 0x00, 0x00, 0x00,
@@ -64,7 +65,8 @@ public class DriverLicense extends Applet {
     expireDate = new byte[DATE_FORMAT_LENGTH];
     avatarImage = new byte[254];
 
-    pinIdLen = (short) pin.length;
+	pinInput = new byte[4];
+    pinLen = (short) pin.length;
     cardIdLen = CARD_ID_LENGTH;
     fullNameLen = (short) fullName.length;
     birthDateLen = (short) birthDate.length;
@@ -73,9 +75,7 @@ public class DriverLicense extends Applet {
     expireDateLen = (short) expireDate.length;
     avatarImageLen = (short) avatarImage.length;
 
-    desKey = new byte[] {'10','E9','76','F8','9D','25','61','A1','10','E9','76','F8','9D','25','61','A1','10','E9','76','F8','9D','25','61','A1'};
-    desICV = new byte[] {'30','E9','11','11','58','9C','B4','32'};
-    desKeyLen = desKey.length;
+    desKeyLen = (short) desKey.length;
 
     desEcbCipher = Cipher.getInstance(Cipher.ALG_DES_ECB_NOPAD, false);
     desCbcCipher = Cipher.getInstance(Cipher.ALG_DES_CBC_NOPAD, false);
@@ -86,11 +86,11 @@ public class DriverLicense extends Applet {
  }
 
   private void encryptData() {
-    cipher.init(tempDesKey3, Cipher.MODE_ENCRYPT);
-    cipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buffer, (short)0);
+    //cipher.init(tempDesKey3, Cipher.MODE_ENCRYPT);
+//    cipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buffer, (short)0);
 
-    cipher.init(tempDesKey3, Cipher.MODE_DECRYPT, desICV, (short)0, (short)8);
-    cipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buffer, (short)0);
+  //  cipher.init(tempDesKey3, Cipher.MODE_DECRYPT, desICV, (short)0, (short)8);
+    //cipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buffer, (short)0);
 
   }
 
@@ -104,14 +104,13 @@ public class DriverLicense extends Applet {
     switch (buf[ISO7816.OFFSET_INS]) {
       case INS_INIT_PIN:
         Util.arrayCopy(buf, (short)ISO7816.OFFSET_CDATA, pin, (short)0, len);
-        pinIdLen = len;
+        pinLen = len;
         break;
       case INS_VERIFY_PIN:
-        byte pinInput[];
         Util.arrayCopy(buf, (short)ISO7816.OFFSET_CDATA, pinInput, (short)0, len);
-        for(short i = 0; i < pinIdLen, i++){
+        for(short i = 0; i < pinLen; i++){
           if((byte)buf[i] != (byte)pin[i]){
-              ISOException.throwIt(ISO7816.SW_INS_NOT_SUPPORTED);
+              ISOException.throwIt(ISO7816.SW_DATA_INVALID);
           }
         }
         break;

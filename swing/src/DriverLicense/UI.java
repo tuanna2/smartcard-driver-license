@@ -528,6 +528,7 @@ public class UI extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        cardIdTextField1.setMinimumSize(new java.awt.Dimension(4, 20));
         cardIdTextField1.setPreferredSize(new java.awt.Dimension(350, 35));
         cardIdTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -570,6 +571,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         jPanel45.add(cardIdTextField);
+        cardIdTextField.getAccessibleContext().setAccessibleDescription("");
 
         jPanel43.add(jPanel45, java.awt.BorderLayout.CENTER);
 
