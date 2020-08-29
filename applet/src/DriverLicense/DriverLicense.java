@@ -84,16 +84,7 @@ public class DriverLicense extends Applet {
 
     JCSystem.requestObjectDeletion();
  }
-/*
-  private void encryptData() {
-    desEcbCipher.init(tempDesKey3, Cipher.MODE_ENCRYPT);
-	desEcbCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buffer, (short)0);
 
-	desCbcCipher.init(tempDesKey3, Cipher.MODE_DECRYPT, desICV, (short)0, (short)8);
-    desCbcCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buffer, (short)0);
-
-  }
-*/
   public void process(APDU apdu) {
     if (selectingApplet()) {
       return;
@@ -104,33 +95,34 @@ public class DriverLicense extends Applet {
     short outlen = 0;
     switch (buf[ISO7816.OFFSET_INS]) {
       case INS_INIT_PIN:
-        Util.arrayCopy(buf, (short)ISO7816.OFFSET_CDATA, pin, (short)0, len);
-        pinLen = len;
+      	desEcbCipher.init(tempDesKey3, Cipher.MODE_ENCRYPT);
+      	outlen = desEcbCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buf, (short)0);
+        Util.arrayCopy(buf, (short) 0, pin, (short) 0, outlen);
+        pinLen = outlen;
         break;
       case INS_VERIFY_PIN:
-        Util.arrayCopy(buf, (short)ISO7816.OFFSET_CDATA, pinInput, (short)0, len);
+		Util.arrayCopy(buf, (short)ISO7816.OFFSET_CDATA, pinInput, (short)0, len);
+      	desCbcCipher.init(tempDesKey3, Cipher.MODE_DECRYPT, desICV, (short)0, (short)8);
+        outlen = desCbcCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, pin, (short)0);
         for(short i = 0; i < pinLen; i++){
-          if((byte)buf[i] != (byte)pin[i]){
+          if((byte)pinInput[i] != (byte)buf[i]){
               ISOException.throwIt(ISO7816.SW_DATA_INVALID);
           }
         }
         break;
       case INS_GET_USER_INFO:
+		desCbcCipher.init(tempDesKey3, Cipher.MODE_DECRYPT, desICV, (short)0, (short)8);
         short lengthDataSend = (short) ((short) (2) + (short) (cardIdLen) + (short) (fullNameLen) + (short) (addressLen) +
           (short) (birthDateLen) + (short) (releaseDateLen) + (short) (expireDateLen) + (short) 0x01);
         apdu.setOutgoing();
         apdu.setOutgoingLength((short) lengthDataSend);
         apdu.sendBytesLong(cardId, (short) 0, (short) cardIdLen);
         
-        desCbcCipher.init(tempDesKey3, Cipher.MODE_DECRYPT, desICV, (short)0, (short)8);
         outlen = desCbcCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, fullName, (short)0);
         apdu.setOutgoingAndSend((short) 0, outlen);
 
         outlen = desCbcCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, address, (short)0);
         apdu.setOutgoingAndSend((short) 0, outlen);
-        // buf[0] = (byte) addressLen;
-        // apdu.sendBytes((short) 0, (short) 1);
-        // apdu.sendBytesLong(address, (short) 0, (short) addressLen);
         apdu.sendBytesLong(birthDate, (short) 0, (short) birthDateLen);
         apdu.sendBytesLong(releaseDate, (short) 0, (short) releaseDateLen);
         apdu.sendBytesLong(expireDate, (short) 0, (short) expireDateLen);
