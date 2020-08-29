@@ -55,7 +55,7 @@ public class DriverLicense extends Applet {
     new DriverLicense()
     .register(bArray, (short) (bOffset + 1), bArray[bOffset]);
 
-    pin = new byte[4];
+    pin = new byte[8];
     cardType = 0x00;
     cardId = new byte[CARD_ID_LENGTH];
     fullName = new byte[50];
@@ -65,7 +65,7 @@ public class DriverLicense extends Applet {
     expireDate = new byte[DATE_FORMAT_LENGTH];
     avatarImage = new byte[254];
 
-	pinInput = new byte[4];
+	pinInput = new byte[8];
     pinLen = (short) pin.length;
     cardIdLen = CARD_ID_LENGTH;
     fullNameLen = (short) fullName.length;

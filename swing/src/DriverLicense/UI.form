@@ -189,7 +189,7 @@
                 <Component class="javax.swing.JLabel" name="rewriteLabel">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t th&#xf4;ng tin"/>
+                    <Property name="text" type="java.lang.String" value="Ghi th&#xf4;ng tin"/>
                   </Properties>
                   <Events>
                     <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="rewriteLabelMousePressed"/>

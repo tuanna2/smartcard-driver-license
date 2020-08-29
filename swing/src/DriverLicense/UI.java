@@ -220,7 +220,7 @@ public class UI extends javax.swing.JFrame {
         jPanel12.setLayout(new java.awt.GridLayout(1, 1, 15, 0));
 
         rewriteLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        rewriteLabel.setText("Cập nhật thông tin");
+        rewriteLabel.setText("Ghi thông tin");
         rewriteLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 rewriteLabelMousePressed(evt);
@@ -841,7 +841,7 @@ public class UI extends javax.swing.JFrame {
             char[] pinChar = pinInput.getPassword();
             String pin = new String(pinChar);
 
-            if (pin.length() != 4) {
+            if (pin.length() != 8) {
                 JOptionPane.showMessageDialog(null, "Mã PIN sai");
                 return;
             }
@@ -926,8 +926,8 @@ public class UI extends javax.swing.JFrame {
     private void btnChangeExpireDate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeExpireDate1ActionPerformed
         // TODO add your handling code here:
           String pin = cardIdTextField1.getText();
-        if (pin.length() != 4) {
-            JOptionPane.showMessageDialog(null, "Mã PIN phải đủ 4 chữ số");
+        if (pin.length() != 8) {
+            JOptionPane.showMessageDialog(null, "Mã PIN phải đủ 8 chữ số");
             return;
         }
         String tempPin[] = pin.split("");
