@@ -98,10 +98,10 @@ public class DriverLicense extends Applet {
       	desEcbCipher.init(tempDesKey3, Cipher.MODE_ENCRYPT);
       	outlen = desEcbCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buf, (short)0);
         Util.arrayCopy(buf, (short) 0, pin, (short) 0, outlen);
-        pinLen = outlen;
+        pinLen = len;
         break;
       case INS_VERIFY_PIN:
-		Util.arrayCopy(buf, (short)ISO7816.OFFSET_CDATA, pinInput, (short)0, len);
+		    Util.arrayCopy(buf, (short)ISO7816.OFFSET_CDATA, pinInput, (short)0, len);
       	desCbcCipher.init(tempDesKey3, Cipher.MODE_DECRYPT, desICV, (short)0, (short)8);
         outlen = desCbcCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, pin, (short)0);
         for(short i = 0; i < pinLen; i++){
@@ -111,21 +111,23 @@ public class DriverLicense extends Applet {
         }
         break;
       case INS_GET_USER_INFO:
-		desCbcCipher.init(tempDesKey3, Cipher.MODE_DECRYPT, desICV, (short)0, (short)8);
+		    desCbcCipher.init(tempDesKey3, Cipher.MODE_DECRYPT, desICV, (short)0, (short)8);
         short lengthDataSend = (short) ((short) (2) + (short) (cardIdLen) + (short) (fullNameLen) + (short) (addressLen) +
           (short) (birthDateLen) + (short) (releaseDateLen) + (short) (expireDateLen) + (short) 0x01);
         apdu.setOutgoing();
         apdu.setOutgoingLength((short) lengthDataSend);
-        apdu.sendBytesLong(cardId, (short) 0, (short) cardIdLen);
-        
+        outlen = desCbcCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, cardId, (short)0);
+        apdu.sendBytes((short) 0, outlen);
         outlen = desCbcCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, fullName, (short)0);
-        apdu.setOutgoingAndSend((short) 0, outlen);
-
+        apdu.sendBytes((short) 0, outlen);
         outlen = desCbcCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, address, (short)0);
-        apdu.setOutgoingAndSend((short) 0, outlen);
-        apdu.sendBytesLong(birthDate, (short) 0, (short) birthDateLen);
-        apdu.sendBytesLong(releaseDate, (short) 0, (short) releaseDateLen);
-        apdu.sendBytesLong(expireDate, (short) 0, (short) expireDateLen);
+        apdu.sendBytes((short) 0, outlen);
+        outlen = desCbcCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, birthDate, (short)0);
+        apdu.sendBytes((short) 0, outlen);
+        outlen = desCbcCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, releaseDate, (short)0);
+        apdu.sendBytes((short) 0, outlen);
+        outlen = desCbcCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, expireDate, (short)0);
+        apdu.sendBytes((short) 0, outlen);  
         buf[0] = cardType;
         apdu.sendBytes((short) 0, (short) 1);
         break;
@@ -154,7 +156,9 @@ public class DriverLicense extends Applet {
         fullNameLen = len;
         break;
       case INS_SET_BIRTH_DATE:
-        Util.arrayCopy(buf, (short)ISO7816.OFFSET_CDATA, birthDate, (short)0, (short)DATE_FORMAT_LENGTH);
+        desEcbCipher.init(tempDesKey3, Cipher.MODE_ENCRYPT);
+      	outlen = desEcbCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buf, (short)0);
+        Util.arrayCopy(buf, (short) 0, birthDate, (short) 0, outlen);
         birthDateLen = DATE_FORMAT_LENGTH;
         break;
       case INS_SET_ADDRESS:
@@ -164,11 +168,15 @@ public class DriverLicense extends Applet {
         addressLen = len;
         break;
       case INS_SET_RELEASE_DATE:
-        Util.arrayCopy(buf, (short) ISO7816.OFFSET_CDATA, releaseDate, (short)0, (short) DATE_FORMAT_LENGTH);
+        desEcbCipher.init(tempDesKey3, Cipher.MODE_ENCRYPT);
+      	outlen = desEcbCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buf, (short)0);
+        Util.arrayCopy(buf, (short) 0, releaseDate, (short) 0, outlen);
         releaseDateLen = DATE_FORMAT_LENGTH;
         break;
       case INS_SET_EXPIRE_DATE:
-        Util.arrayCopy(buf, (short)ISO7816.OFFSET_CDATA, expireDate, (short)0, (short)DATE_FORMAT_LENGTH);
+        desEcbCipher.init(tempDesKey3, Cipher.MODE_ENCRYPT);
+      	outlen = desEcbCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buf, (short)0);
+        Util.arrayCopy(buf, (short) 0, expireDate, (short) 0, outlen);
         expireDateLen = DATE_FORMAT_LENGTH;
         break;
       case INS_SET_AVATAR_IMAGE:
