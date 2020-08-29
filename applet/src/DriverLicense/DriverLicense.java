@@ -55,17 +55,17 @@ public class DriverLicense extends Applet {
     new DriverLicense()
     .register(bArray, (short) (bOffset + 1), bArray[bOffset]);
 
-    pin = new byte[8];
+    pin = new byte[100];
     cardType = 0x00;
     cardId = new byte[CARD_ID_LENGTH];
-    fullName = new byte[50];
+    fullName = new byte[100];
     birthDate = new byte[DATE_FORMAT_LENGTH];
     address = new byte[100];
     releaseDate = new byte[DATE_FORMAT_LENGTH];
     expireDate = new byte[DATE_FORMAT_LENGTH];
     avatarImage = new byte[254];
 
-	pinInput = new byte[8];
+  	pinInput = new byte[8];
     pinLen = (short) pin.length;
     cardIdLen = CARD_ID_LENGTH;
     fullNameLen = (short) fullName.length;
@@ -126,9 +126,11 @@ public class DriverLicense extends Applet {
         outlen = desCbcCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, fullName, (short)0);
         apdu.setOutgoingAndSend((short) 0, outlen);
 
-        buf[0] = (byte) addressLen;
-        apdu.sendBytes((short) 0, (short) 1);
-        apdu.sendBytesLong(address, (short) 0, (short) addressLen);
+        outlen = desCbcCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, address, (short)0);
+        apdu.setOutgoingAndSend((short) 0, outlen);
+        // buf[0] = (byte) addressLen;
+        // apdu.sendBytes((short) 0, (short) 1);
+        // apdu.sendBytesLong(address, (short) 0, (short) addressLen);
         apdu.sendBytesLong(birthDate, (short) 0, (short) birthDateLen);
         apdu.sendBytesLong(releaseDate, (short) 0, (short) releaseDateLen);
         apdu.sendBytesLong(expireDate, (short) 0, (short) expireDateLen);
@@ -146,7 +148,9 @@ public class DriverLicense extends Applet {
         apdu.sendBytesLong(avatarImage, (short) 0, (short)avatarImageLen);
         break;
       case INS_SET_CARD_ID:
-        Util.arrayCopy(buf, (short)ISO7816.OFFSET_CDATA, cardId, (short)0, (short) CARD_ID_LENGTH);
+        desEcbCipher.init(tempDesKey3, Cipher.MODE_ENCRYPT);
+      	outlen = desEcbCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buf, (short)0);
+        Util.arrayCopy(buf, (short) 0, cardId, (short) 0, outlen);
         break;
       case INS_SET_CARD_TYPE:
         cardType = buf[ISO7816.OFFSET_P1];
@@ -162,7 +166,9 @@ public class DriverLicense extends Applet {
         birthDateLen = DATE_FORMAT_LENGTH;
         break;
       case INS_SET_ADDRESS:
-        Util.arrayCopy(buf, (short)ISO7816.OFFSET_CDATA, address, (short)0, len);
+        desEcbCipher.init(tempDesKey3, Cipher.MODE_ENCRYPT);
+      	outlen = desEcbCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buf, (short)0);
+        Util.arrayCopy(buf, (short) 0, address, (short) 0, outlen);
         addressLen = len;
         break;
       case INS_SET_RELEASE_DATE:
