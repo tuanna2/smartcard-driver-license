@@ -84,16 +84,16 @@ public class DriverLicense extends Applet {
 
     JCSystem.requestObjectDeletion();
  }
-
+/*
   private void encryptData() {
-    //cipher.init(tempDesKey3, Cipher.MODE_ENCRYPT);
-//    cipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buffer, (short)0);
+    desEcbCipher.init(tempDesKey3, Cipher.MODE_ENCRYPT);
+	desEcbCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buffer, (short)0);
 
-  //  cipher.init(tempDesKey3, Cipher.MODE_DECRYPT, desICV, (short)0, (short)8);
-    //cipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buffer, (short)0);
+	desCbcCipher.init(tempDesKey3, Cipher.MODE_DECRYPT, desICV, (short)0, (short)8);
+    desCbcCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, buffer, (short)0);
 
   }
-
+*/
   public void process(APDU apdu) {
     if (selectingApplet()) {
       return;
@@ -120,7 +120,10 @@ public class DriverLicense extends Applet {
         apdu.setOutgoing();
         apdu.setOutgoingLength((short) lengthDataSend);
         apdu.sendBytesLong(cardId, (short) 0, (short) cardIdLen);
-        buf[0] = (byte) fullNameLen;
+        
+        desCbcCipher.init(tempDesKey3, Cipher.MODE_DECRYPT, desICV, (short)0, (short)8);
+		desCbcCipher.doFinal(fullName, ISO7816.OFFSET_CDATA, len, buf, (short)0);
+        //buf[0] = (byte) fullNameLen;
         apdu.sendBytes((short) 0, (short) 1);
         apdu.sendBytesLong(fullName, (short) 0, (short) fullNameLen);
         buf[0] = (byte) addressLen;
@@ -149,8 +152,12 @@ public class DriverLicense extends Applet {
         cardType = buf[ISO7816.OFFSET_P1];
         break;
       case INS_SET_FULLNAME:
-        Util.arrayCopy(buf, (short) ISO7816.OFFSET_CDATA, fullName, (short) 0, len);
-        fullNameLen = len;
+		desEcbCipher.init(tempDesKey3, Cipher.MODE_ENCRYPT, desICV, (short)0, (short)8);
+		desEcbCipher.doFinal(buf, ISO7816.OFFSET_CDATA, len, fullName, (short)0);
+        //Util.arrayCopy(buf, (short) ISO7816.OFFSET_CDATA, fullName, (short) 0, len);
+        fullNameLen = desEcbCipher;
+		apdu.setOutgoingAndSend((short)ISO7816.OFFSET_CDATA, desEcbCipher);
+
         break;
       case INS_SET_BIRTH_DATE:
         Util.arrayCopy(buf, (short)ISO7816.OFFSET_CDATA, birthDate, (short)0, (short)DATE_FORMAT_LENGTH);

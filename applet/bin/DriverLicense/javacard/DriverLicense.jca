@@ -1,5 +1,5 @@
 // converted by version 1.3
-// on Sat Aug 29 09:47:47 ICT 2020
+// on Sat Aug 29 15:33:31 ICT 2020
 
 .package DriverLicense {
 	.aid 0x11:0x22:0x33:0x44:0x55;
@@ -100,8 +100,20 @@
 		// 38
 		virtualMethodRef 0.10.5([BSS)V;		// sendBytesLong([BSS)V
 		// 39
-		virtualMethodRef 0.10.4(SS)V;		// sendBytes(SS)V
+		staticFieldRef byte[] DriverLicense/desICV;
 		// 40
+		virtualMethodRef 2.1.4(Ljavacard/security/Key;B[BSS)V;		// init(Ljavacard/security/Key;B[BSS)V
+			.descriptor	Ljavacard/security/Key;	1.0;
+
+		// 41
+		virtualMethodRef 2.1.1([BSS[BS)S;		// doFinal([BSS[BS)S
+		// 42
+		virtualMethodRef 0.10.4(SS)V;		// sendBytes(SS)V
+		// 43
+		virtualMethodRef 2.1.3(Ljavacard/security/Key;B)V;		// init(Ljavacard/security/Key;B)V
+			.descriptor	Ljavacard/security/Key;	1.0;
+
+		// 44
 		staticMethodRef 0.16.3([BSSB)S;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
 	}
 
@@ -367,15 +379,8 @@
 					return;
 		}
 
-		.method private encryptData()V {
-			.stack 0;
-			.locals 0;
-
-				L0:	return;
-		}
-
 		.method public process(Ljavacard/framework/APDU;)V 7 {
-			.stack 5;
+			.stack 6;
 			.locals 3;
 
 			.descriptor	Ljavacard/framework/APDU;	0.10;
@@ -455,15 +460,25 @@
 					sconst_0;
 					getstatic_s 16;		// short DriverLicense/DriverLicense.cardIdLen
 					invokevirtual 38;		// sendBytesLong([BSS)V
+					getstatic_a 27;		// reference DriverLicense/DriverLicense.desCbcCipher
+					getstatic_a 29;		// reference DriverLicense/DriverLicense.tempDesKey3
+					sconst_1;
+					getstatic_a 39;		// reference DriverLicense/DriverLicense.desICV
+					sconst_0;
+					bspush 8;
+					invokevirtual 40;		// init(Ljavacard/security/Key;B[BSS)V
+					getstatic_a 27;		// reference DriverLicense/DriverLicense.desCbcCipher
+					getstatic_a 8;		// reference DriverLicense/DriverLicense.fullName
+					sconst_5;
+					sload_3;
 					aload_2;
 					sconst_0;
-					getstatic_s 17;		// short DriverLicense/DriverLicense.fullNameLen
-					s2b;
-					bastore;
+					invokevirtual 41;		// doFinal([BSS[BS)S
+					pop;
 					aload_1;
 					sconst_0;
 					sconst_1;
-					invokevirtual 39;		// sendBytes(SS)V
+					invokevirtual 42;		// sendBytes(SS)V
 					aload_1;
 					getstatic_a 8;		// reference DriverLicense/DriverLicense.fullName
 					sconst_0;
@@ -477,7 +492,7 @@
 					aload_1;
 					sconst_0;
 					sconst_1;
-					invokevirtual 39;		// sendBytes(SS)V
+					invokevirtual 42;		// sendBytes(SS)V
 					aload_1;
 					getstatic_a 10;		// reference DriverLicense/DriverLicense.address
 					sconst_0;
@@ -505,7 +520,7 @@
 					aload_1;
 					sconst_0;
 					sconst_1;
-					invokevirtual 39;		// sendBytes(SS)V
+					invokevirtual 42;		// sendBytes(SS)V
 					goto_w L27;
 				L14:	aload_1;
 					invokevirtual 36;		// setOutgoing()S
@@ -546,14 +561,20 @@
 					baload;
 					putstatic_b 6;		// byte DriverLicense/DriverLicense.cardType
 					goto_w L27;
-				L18:	aload_2;
+				L18:	getstatic_a 26;		// reference DriverLicense/DriverLicense.desEcbCipher
+					getstatic_a 29;		// reference DriverLicense/DriverLicense.tempDesKey3
+					sconst_2;
+					invokevirtual 43;		// init(Ljavacard/security/Key;B)V
+					getstatic_a 26;		// reference DriverLicense/DriverLicense.desEcbCipher
+					aload_2;
 					sconst_5;
+					sload_3;
 					getstatic_a 8;		// reference DriverLicense/DriverLicense.fullName
 					sconst_0;
-					sload_3;
-					invokestatic 34;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					invokevirtual 41;		// doFinal([BSS[BS)S
 					pop;
-					sload_3;
+					getstatic_a 8;		// reference DriverLicense/DriverLicense.fullName
+					arraylength;
 					putstatic_s 17;		// short DriverLicense/DriverLicense.fullNameLen
 					goto_w L27;
 				L19:	aload_2;
@@ -619,7 +640,7 @@
 					aload_1;
 					sconst_0;
 					sconst_1;
-					invokevirtual 39;		// sendBytes(SS)V
+					invokevirtual 42;		// sendBytes(SS)V
 					goto L27;
 				L24:	getfield_a_this 0;		// reference DriverLicense/DriverLicense.listViolation
 					sconst_0;
@@ -640,7 +661,7 @@
 					sconst_0;
 					sspush 8192;
 					sconst_0;
-					invokestatic 40;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					invokestatic 44;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
 					pop;
 					sconst_0;
 					putstatic_s 22;		// short DriverLicense/DriverLicense.avatarImageLen
